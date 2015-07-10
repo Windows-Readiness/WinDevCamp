@@ -23,7 +23,7 @@
 
 1. From the new project wizard, choose Create a blank application (Using the Windows 10 sample template)
 1. Start the application
-1. Note that the sample template contains a serie of todo lists
+1. Note that the sample template contains a series of todo lists
 1. From MainPage.xaml, insert in the Hub control a HubSection that contains a DataTemplate with a Rectangle
 1. Start the application
 1. Notice the rectangle appears. That is the place where we want to place the ads
