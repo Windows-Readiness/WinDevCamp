@@ -76,7 +76,7 @@
                         <!-- item checked -->
                         <CheckBox IsChecked="{Binding TodoItem.IsComplete, Mode=TwoWay}" Grid.Column="0" VerticalAlignment="Center" Height="32" Width="32" />
                         <!-- item image -->
-                        <Image Grid.Column="1" Height="40" Width="60" Margin="0,0,12,0" Source="{Binding TodoItem.ImageSource}"/>
+                        <Image Grid.Column="1" Height="40" Width="60" Margin="0,0,12,0" Source="{Binding TodoItem.ImageUri}"/>
                         <!-- item title -->
                         <TextBlock Grid.Column="2" VerticalAlignment="Center" Foreground="Black" Text="{Binding TodoItem.Title}" FontWeight="Normal" LineHeight="20" />
                         <!-- item strikethrough -->

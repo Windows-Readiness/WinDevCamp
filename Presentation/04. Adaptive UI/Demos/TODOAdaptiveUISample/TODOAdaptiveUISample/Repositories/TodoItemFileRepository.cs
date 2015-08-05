@@ -65,14 +65,25 @@ namespace TODOAdaptiveUISample.Repositories
         public Models.TodoItem Factory(string id = null, bool? complete = null, string title = null, DateTime? dueDate = null)
         {
             string imageNum = new Random().Next(5).ToString();
-            return new Models.TodoItem
+            // Uri format is different at design-time than at runtime - set appropriately
+            Uri imageUri = null;
+            if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            {
+                imageUri = new Uri("ms-appx:/Images/Placeholder1.png");
+            }
+            else
+            {
+                imageUri = new Uri("ms-appx:///Images/Placeholder" + imageNum + ".png");
+            }
+            var item = new Models.TodoItem
             {
                 Id = id ?? Guid.NewGuid().ToString(),
                 IsComplete = complete ?? false,
                 Title = title ?? string.Empty,
-                ImageUri = new Uri("ms-appx:///Images/Placeholder" + imageNum + ".png"),
+                ImageUri = imageUri,
                 DueDate = DateTime.Now.AddDays(7)
             };
+            return item;
         }
 
         public Models.TodoItem Clone(Models.TodoItem item)

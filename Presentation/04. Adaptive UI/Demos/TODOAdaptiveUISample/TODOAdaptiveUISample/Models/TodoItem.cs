@@ -35,30 +35,7 @@ namespace TODOAdaptiveUISample.Models
             get { return _ImageUri; }
             set
             {
-                if (!object.Equals(_ImageUri, value))
-                {
-                    SetImage(value);
-                }
                 Set(ref _ImageUri, value);
-            }
-        }
-
-        private BitmapImage _ImageSource;
-        public BitmapImage ImageSource { get { return _ImageSource; } set { Set(ref _ImageSource, value); } }
-
-        private async void SetImage(Uri targetImageUri)
-        {
-            if (targetImageUri == null)
-            {
-                ImageSource = null;
-            }
-            else
-            {
-                var file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(targetImageUri);
-                var fileStream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                var img = new BitmapImage();
-                img.SetSource(fileStream);
-                ImageSource = img;
             }
         }
     }
