@@ -9,7 +9,7 @@
     Title="Edit ToDo Item" 
     PrimaryButtonText="Close" 
     SecondaryButtonText="Delete" 
-    d:DesignHeight="300"
+    d:DesignHeight="500"
     d:DesignWidth="360">
 
     <ContentDialog.Resources>
