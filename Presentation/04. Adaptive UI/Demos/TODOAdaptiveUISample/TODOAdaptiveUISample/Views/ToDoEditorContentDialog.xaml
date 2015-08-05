@@ -23,32 +23,32 @@
     <ContentDialog.Content>
         <Grid>
             <ScrollViewer>
-            <StackPanel>
-                <RelativePanel>
-                    <!-- item checked -->
-                    <CheckBox IsChecked="{Binding TodoItem.IsComplete, Mode=TwoWay}" Height="32" Width="32" 
-                                        Content="Is Complete?" HorizontalAlignment="Left"/>
-                    <!-- item star -->
-                    <CheckBox IsChecked="{Binding TodoItem.IsFavorite, Mode=TwoWay}" Height="32" Width="32"  
-                                        Style="{StaticResource StarCheckBoxStyle}" RelativePanel.AlignRightWithPanel="True"/>
-                </RelativePanel>
+                <StackPanel>
+                    <RelativePanel>
+                        <!-- item checked -->
+                        <CheckBox IsChecked="{Binding TodoItem.IsComplete, Mode=TwoWay}" Height="32" Width="32" 
+                                            Content="Is Complete?" HorizontalAlignment="Left"/>
+                        <!-- item star -->
+                        <CheckBox IsChecked="{Binding TodoItem.IsFavorite, Mode=TwoWay}" Height="32" Width="32"  
+                                            Style="{StaticResource StarCheckBoxStyle}" RelativePanel.AlignRightWithPanel="True"/>
+                    </RelativePanel>
 
-                <!-- Image -->
-                <Image  Source="{Binding TodoItem.ImageSource}" Width="300" Height="180" Stretch="UniformToFill"/>
+                    <!-- Image -->
+                    <Image  Source="{Binding TodoItem.ImageSource}" Width="300" Height="180" Stretch="UniformToFill"/>
 
-                <CommandBar Margin="0,0,0,8">
-                    <AppBarButton x:Name="TakePictureButton" Icon="Camera" Label="photo" Command="{Binding TakePictureCommand}"/>
-                    <AppBarButton x:Name="SelectPictureButton" Icon="Pictures" Label="select" Command="{Binding SelectPictureCommand}"/>
-                </CommandBar>
+                    <CommandBar Margin="0,0,0,8">
+                        <AppBarButton x:Name="TakePictureButton" Icon="Camera" Label="photo" Command="{Binding TakePictureCommand}"/>
+                        <AppBarButton x:Name="SelectPictureButton" Icon="Pictures" Label="select" Command="{Binding SelectPictureCommand}"/>
+                    </CommandBar>
                     
-                <!-- item details -->
-                <TextBox Width="300" Header="Title" Text="{Binding TodoItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                    Margin="0,12,0,0" />
-                <TextBox Width="300" Height="96" Margin="0,12,0,0" Header="Details" 
-                                    Text="{Binding TodoItem.Details, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <DatePicker Width="300" Margin="0,12,0,0" Header="Due Date" 
-                                    Date="{Binding TodoItem.DueDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            </StackPanel>
+                    <!-- item details -->
+                    <TextBox Width="300" Header="Title" Text="{Binding TodoItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        Margin="0,12,0,0" />
+                    <TextBox Width="300" Height="96" Margin="0,12,0,0" Header="Details" 
+                                        Text="{Binding TodoItem.Details, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <DatePicker Width="300" Margin="0,12,0,0" Header="Due Date" 
+                                        Date="{Binding TodoItem.DueDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
             </ScrollViewer>
         </Grid>
     </ContentDialog.Content>

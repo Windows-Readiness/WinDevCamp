@@ -147,6 +147,14 @@ namespace TODOAdaptiveUISample.ViewModels
             ((App)App.Current).NavigationService.GoBack();
         }
 
+        Mvvm.Command<Models.TodoItem> _UpdateItemCommand = default(Mvvm.Command<Models.TodoItem>);
+        public Mvvm.Command<Models.TodoItem> UpdateItemCommand { get { return _UpdateItemCommand ?? (_UpdateItemCommand = new Mvvm.Command<Models.TodoItem>(ExecuteUpdateItemCommand, CanExecuteUpdateItemCommand)); } }
+        private bool CanExecuteUpdateItemCommand(Models.TodoItem param) { return this.TodoItem != null; }
+        private async void ExecuteUpdateItemCommand(Models.TodoItem param)
+        {
+            await _todoItemRepository.UpdateTodoItem(this.TodoItem);
+        }
+
         #endregion  
     }
 }

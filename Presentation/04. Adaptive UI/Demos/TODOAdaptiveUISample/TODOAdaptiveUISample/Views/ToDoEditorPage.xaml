@@ -39,7 +39,7 @@
         <Grid Grid.Row="1" Margin="12,0,12,0" MaxWidth="400">
             <ScrollViewer>
                 <StackPanel>
-                    <RelativePanel Width="300" HorizontalAlignment="Center">
+                    <RelativePanel Width="296" HorizontalAlignment="Center">
                         <!-- item checked -->
                         <CheckBox IsChecked="{Binding TodoItem.IsComplete, Mode=TwoWay}" Height="32" Width="32" 
                                         Content="Is Complete?" HorizontalAlignment="Left"/>
@@ -49,9 +49,9 @@
                     </RelativePanel>
 
                     <!-- Image -->
-                    <Image  Source="{Binding TodoItem.ImageUri}" Width="300" Height="180" Stretch="UniformToFill"/>
+                    <Image  Source="{Binding TodoItem.ImageUri}" Width="296" Height="180" Stretch="UniformToFill"/>
 
-                    <RelativePanel Width="300">
+                    <RelativePanel Width="296">
                         <AppBarButton x:Name="TakePictureButton" Icon="Camera" Label="photo" Command="{Binding TakePictureCommand}"
                                       RelativePanel.LeftOf="SelectPictureButton"/>
                         <AppBarButton x:Name="SelectPictureButton" Icon="Pictures" Label="select" Command="{Binding SelectPictureCommand}"
@@ -59,11 +59,11 @@
                     </RelativePanel>
 
                     <!-- item details -->
-                    <TextBox Width="300" Header="Title" Text="{Binding TodoItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    <TextBox Width="296" Header="Title" Text="{Binding TodoItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                     Margin="0,12,0,0" />
-                    <TextBox Width="300" Height="96" Margin="0,12,0,0" Header="Details" 
+                    <TextBox Width="296" Height="96" Margin="0,12,0,0" Header="Details" 
                                     Text="{Binding TodoItem.Details, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <DatePicker Width="300" Margin="0,12,0,0" Header="Due Date" 
+                    <DatePicker Width="296" Margin="0,12,0,0" Header="Due Date" 
                                 Date="{Binding TodoItem.DueDate, Mode=TwoWay, Converter={StaticResource DateTimeToDateTimeOffsetConverter}}" 
                                 HorizontalAlignment="Center" />
                 </StackPanel>

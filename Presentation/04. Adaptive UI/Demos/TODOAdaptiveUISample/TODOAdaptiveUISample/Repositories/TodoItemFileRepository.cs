@@ -69,7 +69,7 @@ namespace TODOAdaptiveUISample.Repositories
             Uri imageUri = null;
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
-                imageUri = new Uri("ms-appx:/Images/Placeholder1.png");
+                imageUri = new Uri("ms-appx:/Images/Placeholder" + imageNum + ".png");
             }
             else
             {

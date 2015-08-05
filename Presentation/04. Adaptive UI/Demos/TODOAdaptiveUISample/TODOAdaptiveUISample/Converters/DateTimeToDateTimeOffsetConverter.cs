@@ -18,7 +18,7 @@ namespace TODOAdaptiveUISample.Converters
                 return new DateTimeOffset(date);
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 return DateTimeOffset.MinValue;
             }
@@ -31,7 +31,7 @@ namespace TODOAdaptiveUISample.Converters
                 DateTimeOffset dto = (DateTimeOffset)value;
                 return dto.DateTime;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return DateTime.MinValue;
             }
