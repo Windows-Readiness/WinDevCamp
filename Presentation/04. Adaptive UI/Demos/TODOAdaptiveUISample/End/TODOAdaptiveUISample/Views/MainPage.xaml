@@ -21,21 +21,35 @@
                 <VisualState x:Name="VisualStateMin0">
                     <VisualState.Setters>
                         <Setter Target="InlineToDoItemViewGrid.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="InlineViewerBackground.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="AppTitle.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>24,12</Thickness>
+                            </Setter.Value>
+                        </Setter>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="1"/>
                     </VisualState.StateTriggers>
                 </VisualState>
-                <VisualState x:Name="VisualStateMin500">
+                <VisualState x:Name="VisualStateMin800">
+                    <VisualState.Setters>
+                        <Setter Target="InlineViewerBackground.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="VisualStateMin1200">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1200"/>
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Rectangle Margin="0,0,0,-12" >
             <Rectangle.Fill>
@@ -53,7 +67,7 @@
                 <SolidColorBrush Color="Black" Opacity=".1" />
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <ListView x:Name="ToDoListView" Padding="0,0,0,12" Margin="0,8,0,0" MaxWidth="980"
@@ -94,11 +108,12 @@
                 </ListView.ItemTemplate>
             </ListView>
 
+            <Rectangle x:Name="InlineViewerBackground" Width="600" Fill="LightBlue" Grid.Column="1"/>
             <Grid x:Name="InlineToDoItemViewGrid" Background="LightBlue" Grid.Column="1" Margin="0,8,0,0">
-                <views:ToDoItemFullViewUserControl x:Name="InlineViewerEditor" Margin="24" HorizontalAlignment="Left"/>
+                <views:ToDoItemFullViewUserControl x:Name="InlineViewerEditor" Margin="24" HorizontalAlignment="Center"/>
             </Grid>
         </Grid>
-        
+
         <!-- busy indicator -->
         <Popup IsOpen="{Binding Busy}" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid Background="{ThemeResource ContentDialogBorderThemeBrush}" Height="100" Width="200">
