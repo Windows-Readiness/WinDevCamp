@@ -22,27 +22,7 @@ namespace TODOAdaptiveUISample.Views
 
         private void TodoItem_ItemClicked(object sender, ItemClickEventArgs e)
         {
-            // If the inline panel is not showing, navigate to the separate editing page
-            if (InlineToDoItemViewGrid.Visibility == Visibility.Collapsed)
-            {
-                ((App)(Application.Current)).NavigationService.Navigate(typeof(ToDoEditorPage), ((TodoItemViewModel)e.ClickedItem).TodoItem.Id);
-            }
-        }
-
-        private void TodoItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // If the inline viewer is visible, set the data context to the selected item
-            if (e.AddedItems != null && InlineToDoItemViewGrid.Visibility == Visibility.Visible)
-            {
-                // First save changes on the previous one
-                // TODO add a 'Dirty' flag to the ViewModel so we only save changes if there is something to save
-                TodoItemViewModel vm = InlineViewerEditor.DataContext as TodoItemViewModel;
-                if (vm != null)
-                    vm.UpdateItemCommand.Execute(vm.TodoItem);
-
-                // Set to the new item
-                InlineViewerEditor.DataContext = e.AddedItems[0];
-            }
+            ((App)(Application.Current)).NavigationService.Navigate(typeof(ToDoEditorPage), ((TodoItemViewModel)e.ClickedItem).TodoItem.Id);
         }
 
         private TextBox NewToDoItemNameTextBox = null;
