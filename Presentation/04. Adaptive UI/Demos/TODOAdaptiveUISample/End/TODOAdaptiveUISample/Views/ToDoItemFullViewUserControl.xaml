@@ -10,15 +10,7 @@
     d:DesignHeight="550"
     d:DesignWidth="400"
     d:DataContext="vm:TodoItemViewModel">
-
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Styles/StarRadioButtonStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
-
+ 
     <Grid>
         <ScrollViewer>
             <StackPanel Margin="0,0,24,0">

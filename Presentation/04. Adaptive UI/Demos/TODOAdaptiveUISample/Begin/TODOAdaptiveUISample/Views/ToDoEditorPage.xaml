@@ -8,13 +8,6 @@
     xmlns:vm="using:TODOAdaptiveUISample.ViewModels"
     mc:Ignorable="d">
 
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Styles/StarRadioButtonStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.Content>
