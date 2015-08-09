@@ -136,6 +136,11 @@ namespace LifecycleDemo
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
 
+            // You MUST ensure the app's permanent data is safely stored at this point
+            // in case the app is terminated while suspended.
+            // We have nothing to do in this sample, since the data is safely stored
+            // when navigating from Page2
+
             // Set this flag - this happens before the page navigatedfrom
             IsSuspending = true;
 
