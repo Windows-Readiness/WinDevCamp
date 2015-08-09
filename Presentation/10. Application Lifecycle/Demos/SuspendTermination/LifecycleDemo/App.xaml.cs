@@ -35,9 +35,14 @@ namespace LifecycleDemo
             this.Resuming += OnResuming;
         }
 
+        public bool IsSuspending = false;
+
         private void OnResuming(object sender, object e)
         {
             // TODO: whatever you need to do to resume your app
+
+            // Clear the IsSuspending flag
+            IsSuspending = false;
 
         }
 
@@ -130,6 +135,9 @@ namespace LifecycleDemo
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+
+            // Set this flag - this happens before the page navigatedfrom
+            IsSuspending = true;
 
             // Get the frame navigation state serialized as a string and save in settings
             Frame frame = Window.Current.Content as Frame;

@@ -8,7 +8,12 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="173,148,0,0" TextWrapping="Wrap" Text="Page2" VerticalAlignment="Top" FontSize="32"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="87,66,0,0" TextWrapping="Wrap" 
+                   Text="Page2" VerticalAlignment="Top" FontSize="32"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="87,151,0,0" TextWrapping="Wrap" 
+                 Text="{Binding Field1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="236" Header="Field1"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Margin="87,255,0,0" TextWrapping="Wrap" 
+                 Text="{Binding Field2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="236" Header="Field2" Height="309"/>
 
     </Grid>
 </Page>
