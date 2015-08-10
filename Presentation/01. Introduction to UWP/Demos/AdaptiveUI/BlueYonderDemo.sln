@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueYonderDemo", "BlueYonderDemo\BlueYonderDemo.csproj", "{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Debug|ARM.ActiveCfg = Debug|ARM
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Debug|ARM.Build.0 = Debug|ARM
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Debug|ARM.Deploy.0 = Debug|ARM
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Debug|x64.ActiveCfg = Debug|x64
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Debug|x64.Build.0 = Debug|x64
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Debug|x64.Deploy.0 = Debug|x64
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Debug|x86.ActiveCfg = Debug|x86
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Debug|x86.Build.0 = Debug|x86
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Debug|x86.Deploy.0 = Debug|x86
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Release|ARM.ActiveCfg = Release|ARM
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Release|ARM.Build.0 = Release|ARM
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Release|ARM.Deploy.0 = Release|ARM
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Release|x64.ActiveCfg = Release|x64
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Release|x64.Build.0 = Release|x64
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Release|x64.Deploy.0 = Release|x64
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Release|x86.ActiveCfg = Release|x86
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Release|x86.Build.0 = Release|x86
+		{C8CCAEE4-CE0E-4249-A90C-2F029A09A05E}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

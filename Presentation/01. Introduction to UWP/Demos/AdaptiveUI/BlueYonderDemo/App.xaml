@@ -1,0 +1,53 @@
+﻿<Application
+    x:Class="BlueYonderDemo.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BlueYonderDemo">
+    <Application.Resources>
+
+        <SolidColorBrush x:Key="BlueBrush" Color="#FF1C90D1"/>
+        <SolidColorBrush x:Key="DarkGreyBrush" Color="#FF363636"/>
+        <SolidColorBrush x:Key="MidGreyBrush" Color="#FF7A7A7A"/>
+        <SolidColorBrush x:Key="EggshellBrush" Color="#FFFAFFF7"/>
+        <SolidColorBrush x:Key="OrangeBrush" Color="#FFFF9C1E"/>
+        <FontFamily x:Key="LustScriptFont">Assets/Fonts/LustScriptDisplay.otf#Lust Script Display</FontFamily>
+        <FontFamily x:Key="DomusTitlingFont">Assets/Fonts/DomusTitling.otf#Domus Titling</FontFamily>
+        <FontFamily x:Key="IskraLtFont">Assets/Fonts/IskraLt.otf#Iskra Lt</FontFamily>
+        <FontFamily x:Key="AlternateGothicFont">Assets/Fonts/AlternateGotNo1D.otf#Alternate Gothic No1 D</FontFamily>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource DomusTitlingFont}"/>
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        
+        <Style x:Key="AirportText" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AlternateGothicFont}"/>
+            <Setter Property="FontSize" Value="72"/>
+            <Setter Property="Foreground" Value="{StaticResource BlueBrush}"/>
+            <Setter Property="Margin" Value="0,-12,0,-20"/>
+        </Style>
+
+        <Style x:Key="AirportTime" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AlternateGothicFont}"/>
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="Foreground" Value="{StaticResource MidGreyBrush}"/>
+            <Setter Property="Margin" Value="0,-4,0,-7"/>
+        </Style>
+
+        <Style x:Key="AirportName" TargetType="TextBlock" >
+            <Setter Property="FontFamily" Value="{StaticResource DomusTitlingFont}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="{StaticResource MidGreyBrush}"/>
+            <Setter Property="Margin" Value="0,-2,0,-6"/>
+        </Style>
+
+        <Style x:Key="FlightNo" TargetType="TextBlock" >
+            <Setter Property="FontFamily" Value="{StaticResource DomusTitlingFont}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="{StaticResource OrangeBrush}"/>
+            <Setter Property="Margin" Value="0,-2,0,-6"/>
+        </Style>
+
+    </Application.Resources>
+
+</Application>

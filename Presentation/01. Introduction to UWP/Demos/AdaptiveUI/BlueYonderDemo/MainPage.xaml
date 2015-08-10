@@ -1,0 +1,242 @@
+﻿<Page
+    x:Class="BlueYonderDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BlueYonderDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="Light">
+
+    <Grid Background="{StaticResource EggshellBrush}">
+        
+                <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowStates">
+
+                     
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MenuSplitView.DisplayMode" Value="Overlay" />
+                        <Setter Target="MenuSplitView.IsPaneOpen" Value="False" />
+                        <Setter Target="BannerImage.Height" Value="120"/>
+                        <Setter Target="BannerText.(RelativePanel.Below)" Value="BannerImage"/>
+                        <Setter Target="BannerText.Width" Value="660"/>
+                        <Setter Target="BannerText.Margin" Value="0,0,0,24"/>
+                        <Setter Target="Headline.FontSize" Value="28"/>
+                        <Setter Target="Subtitle.FontSize" Value="12"/>
+                        <Setter Target="FlightsGrid.Margin" Value="24,0,0,24"/>
+                        
+                        <Setter Target="BlueYonderGrid.(RelativePanel.Below)" Value="FlightsGrid"/>
+                        <Setter Target="BlueYonderGrid.(RelativePanel.AlignLeftWithPanel)" Value="True"/>
+                        
+                        <Setter Target="BlueYonderGrid.Margin" Value="24,-24,24,24" />
+                        
+                        <Setter Target="SearchGrid.(RelativePanel.Below)" Value="BlueYonderGrid"/>
+                        <Setter Target="SearchGrid.(RelativePanel.AlignLeftWithPanel)" Value="True"/>
+                        
+                        
+                    </VisualState.Setters>
+                </VisualState>                
+
+                
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="MenuSplitView.DisplayMode" Value="Inline" />
+                        <Setter Target="MenuSplitView.IsPaneOpen" Value="True" />
+                        <Setter Target="BannerText.(RelativePanel.AlignTopWith)" Value="BannerImage"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+
+                
+                
+                <VisualState x:Name="MediumState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="660"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="BannerImage.Height" Value="180" />
+                        <Setter Target="MenuSplitView.DisplayMode" Value="CompactInline" />                
+                        <Setter Target="MenuSplitView.IsPaneOpen" Value="False" />
+                        <Setter Target="BannerText.(RelativePanel.AlignTopWith)" Value="BannerImage"/>
+                        <Setter Target="Headline.FontSize" Value="28"/>
+                        <Setter Target="Subtitle.FontSize" Value="14"/>
+                        <Setter Target="SearchGrid.(RelativePanel.Below)" Value="BlueYonderGrid"/>
+                        <Setter Target="SearchGrid.(RelativePanel.RightOf)" Value="FlightsGrid"/>
+                        <Setter Target="SearchGrid.Margin" Value="0,24,24,24"/>
+                    </VisualState.Setters>
+                </VisualState>
+               
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        
+        <SplitView x:Name="MenuSplitView" DisplayMode="Inline" IsPaneOpen="True">
+            <SplitView.Pane>
+                <Grid Background="{StaticResource DarkGreyBrush}">
+                                        <StackPanel x:Name="tree">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,50,0,8" >
+                            <SymbolIcon Symbol="Home"  Margin="12,0,0,0" VerticalAlignment="Center"
+                                        ToolTipService.Placement="Right" Foreground="{StaticResource BlueBrush}"/>
+                            <TextBlock Text="Home" Margin="24,0,0,0" VerticalAlignment="Center" Foreground="{StaticResource BlueBrush}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,8" >
+                            <SymbolIcon Symbol="OutlineStar"  Margin="12,0,0,0" VerticalAlignment="Center"
+                                        ToolTipService.Placement="Right" Foreground="{StaticResource EggshellBrush}"/>
+                            <TextBlock Text="BlueYonder Miles" Margin="24,0,0,0" VerticalAlignment="Center" Foreground="{StaticResource EggshellBrush}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,8" >
+                            <SymbolIcon Symbol="World"  Margin="12,0,0,0" VerticalAlignment="Center"
+                                        ToolTipService.Placement="Right" Foreground="{StaticResource EggshellBrush}"/>
+                            <TextBlock Text="Book a flight" Margin="24,0,0,0" VerticalAlignment="Center" Foreground="{StaticResource EggshellBrush}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,8" >
+                            <SymbolIcon Symbol="Phone"  Margin="12,0,0,0" VerticalAlignment="Center"
+                                        ToolTipService.Placement="Right" Foreground="{StaticResource EggshellBrush}"/>
+                            <TextBlock Text="Help" Margin="24,0,0,0" VerticalAlignment="Center" Foreground="{StaticResource EggshellBrush}"/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </Grid>
+            </SplitView.Pane>
+            
+                        <ScrollViewer>
+                <RelativePanel x:Name="MainContent" Margin="0,32,0,0">
+                    <RelativePanel x:Name="PromoArea" RelativePanel.AlignLeftWithPanel="True" Grid.ColumnSpan="2">
+                        <Image x:Name="BannerImage" HorizontalAlignment="Right" Height="280" Stretch="UniformToFill" Source="Assets/clouds.png" RelativePanel.AlignRightWithPanel="True"></Image>
+                        <Grid x:Name="BannerText" Margin="24" Background="{StaticResource BlueBrush}">
+                            <StackPanel Margin="12" HorizontalAlignment="Stretch">
+                                <TextBlock x:Name="Headline" Text="Come fly with us" Margin="0,-32,0,0" Foreground="{StaticResource EggshellBrush}" FontFamily="{StaticResource LustScriptFont}" FontSize="48"/>
+                                <TextBlock x:Name="Subtitle" Foreground="{StaticResource EggshellBrush}" FontSize="21.333" FontFamily="{StaticResource DomusTitlingFont}">
+                                	<Run Text="Fly return to London"/>
+                                	<LineBreak/>
+                                	<Run Text="For only $800"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </RelativePanel>
+                    
+                    <Grid x:Name="FlightsGrid" Margin="24,24,24,24" RelativePanel.Below="PromoArea" >
+
+
+                        <StackPanel>
+                            <TextBlock Text="Upcoming flights" FontSize="24" Margin="0,-12,0,24"/>
+                            <Border BorderBrush="{StaticResource MidGreyBrush}" BorderThickness="1" Padding="12" Background="#FFeeeeee" Margin="0,0,0,24">
+                                <RelativePanel Width="240">
+                                    <TextBlock x:Name="DepAirport" Text="SEA" Style="{StaticResource AirportText}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
+                                    <TextBlock x:Name="DepName" Text="SEATTLE" Style="{StaticResource AirportName}" RelativePanel.Below="DepAirport" RelativePanel.AlignLeftWith="DepAirport"/>
+                                    <TextBlock x:Name="DepDate" Text="MON 9 FEB" Style="{StaticResource AirportName}" RelativePanel.AlignBottomWith="DepName" RelativePanel.AlignRightWithPanel="True"/>
+                                    <TextBlock x:Name="FlightNumber" Text="BY49" Style="{StaticResource FlightNo}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWith="DepDate"/>
+                                    <TextBlock x:Name="DepTime" Text="18:30" Style="{StaticResource AirportTime}"  RelativePanel.AlignBottomWith="DepAirport" RelativePanel.AlignLeftWith="DepDate"/>
+
+                                    <Rectangle x:Name="FlightDivider" Height="1" Width="200" Margin="24" Fill="{StaticResource MidGreyBrush}" RelativePanel.Below="DepName" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+
+                                    <Grid Background="#FFeeeeee" RelativePanel.AlignHorizontalCenterWith="FlightDivider" RelativePanel.AlignVerticalCenterWith="FlightDivider">
+                                        <TextBlock x:Name="ToText" Text="To" Margin="12,-6,12,0" />
+                                    </Grid>
+                                    
+                                    <TextBlock x:Name="ArrAirport" Text="LHR" Style="{StaticResource AirportText}" RelativePanel.Below="FlightDivider" RelativePanel.AlignLeftWithPanel="True"/>
+                                    <TextBlock x:Name="ArrName" Text="LONDON" Style="{StaticResource AirportName}" RelativePanel.Below="ArrAirport" RelativePanel.AlignLeftWith="DepAirport"/>
+                                    <TextBlock x:Name="ArrDate" Text="TUE 10 FEB" Style="{StaticResource AirportName}" RelativePanel.AlignBottomWith="ArrName" RelativePanel.AlignRightWithPanel="True"/>
+
+                                    <TextBlock x:Name="ArrTime" Text="11:25" Style="{StaticResource AirportTime}"  RelativePanel.AlignBottomWith="ArrAirport" RelativePanel.AlignLeftWith="DepDate"/>
+
+                                </RelativePanel>
+                            </Border>
+
+                            <Border BorderBrush="{StaticResource MidGreyBrush}" BorderThickness="1" Padding="12" Background="#FFeeeeee" Margin="0,0,0,24">
+                                <RelativePanel Width="240">
+                                    <TextBlock x:Name="DepAirport2" Text="SEA" Style="{StaticResource AirportText}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
+                                    <TextBlock x:Name="DepName2" Text="SEATTLE" Style="{StaticResource AirportName}" RelativePanel.Below="DepAirport2" RelativePanel.AlignLeftWith="DepAirport2"/>
+                                    <TextBlock x:Name="DepDate2" Text="MON 9 FEB" Style="{StaticResource AirportName}" RelativePanel.AlignBottomWith="DepName2" RelativePanel.AlignRightWithPanel="True"/>
+                                    <TextBlock x:Name="FlightNumber2" Text="BY49" Style="{StaticResource FlightNo}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWith="DepDate2"/>
+                                    <TextBlock x:Name="DepTime2" Text="18:30" Style="{StaticResource AirportTime}"  RelativePanel.AlignBottomWith="DepAirport2" RelativePanel.AlignLeftWith="DepDate2"/>
+
+                                    <Rectangle x:Name="FlightDivider2" Height="1" Width="200" Margin="24" Fill="{StaticResource MidGreyBrush}" RelativePanel.Below="DepName2" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+
+                                    <Grid Background="#FFeeeeee" RelativePanel.AlignHorizontalCenterWith="FlightDivider2" RelativePanel.AlignVerticalCenterWith="FlightDivider2">
+                                        <TextBlock x:Name="ToText2" Text="To" Margin="12,-6,12,0" />
+                                    </Grid>
+                                    
+                                    <TextBlock x:Name="ArrAirport2" Text="LHR" Style="{StaticResource AirportText}" RelativePanel.Below="FlightDivider2" RelativePanel.AlignLeftWithPanel="True"/>
+                                    <TextBlock x:Name="ArrName2" Text="LONDON" Style="{StaticResource AirportName}" RelativePanel.Below="ArrAirport2" RelativePanel.AlignLeftWith="DepAirport2"/>
+                                    <TextBlock x:Name="ArrDate2" Text="TUE 10 FEB" Style="{StaticResource AirportName}" RelativePanel.AlignBottomWith="ArrName2" RelativePanel.AlignRightWithPanel="True"/>
+
+                                    <TextBlock x:Name="ArrTime2" Text="11:25" Style="{StaticResource AirportTime}"  RelativePanel.AlignBottomWith="ArrAirport2" RelativePanel.AlignLeftWith="DepDate2"/>
+
+                                </RelativePanel>
+                            </Border>
+
+                        </StackPanel>
+                    </Grid>
+                    
+                    <StackPanel x:Name="BlueYonderGrid" RelativePanel.Below="PromoArea" RelativePanel.RightOf="FlightsGrid">
+                        <TextBlock Text="BlueYonder Miles" FontSize="24" Foreground="{StaticResource BlueBrush}" Margin="0,12,0,24"/>
+                        <Border Background="{StaticResource BlueBrush}" Padding="12">
+                            <RelativePanel Width="240">
+                                <TextBlock x:Name="MileCount" Text="320,000" Style="{StaticResource AirportText}" Foreground="{StaticResource EggshellBrush}" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignRightWithPanel="True"/>
+                                <TextBlock x:Name="MileLabel" Text="miles" Foreground="{StaticResource EggshellBrush}" RelativePanel.Below="MileCount" RelativePanel.AlignRightWithPanel="True"/>
+                            </RelativePanel>
+                        </Border>
+                        <StackPanel HorizontalAlignment="Stretch" Background="#FFefefef">
+                            <TextBlock Margin="12" Text="Platinum member" Foreground="{StaticResource DarkGreyBrush}" FontSize="24"/>
+                            <TextBlock Margin="12,-6,12,12" Text="Dave Crawford" Foreground="{StaticResource MidGreyBrush}"/>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Stretch" Background="{StaticResource BlueBrush}">
+                            <TextBlock Margin="12" Text="350 tier points" Foreground="{StaticResource EggshellBrush}" HorizontalAlignment="Right"/>
+                            <TextBlock Margin="12,-6,12,12" Text="Expires 31 Dec 2015" Foreground="{StaticResource EggshellBrush}" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    
+                    <Border x:Name="SearchGrid" Background="{StaticResource OrangeBrush}" Margin="24,24,24,24" Padding="12" RelativePanel.Below="PromoArea" RelativePanel.RightOf="BlueYonderGrid">
+                        <Grid HorizontalAlignment="Stretch">
+                            <StackPanel>
+                                <TextBlock Text="Get set, go!" FontSize="36" Margin="0,-36,0,0" Foreground="{StaticResource EggshellBrush}" FontFamily="{StaticResource LustScriptFont}"/>
+                                <RelativePanel Width="240">
+                                    <TextBlock x:Name="LblDep" Text="From" Margin="0,2,24,20" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True"/>
+                                    <TextBox x:Name="TxtDep" Width="160" Margin="0,0,0,12" RelativePanel.AlignTopWithPanel="True" RelativePanel.RightOf="LblDep"/>
+                                    <TextBlock x:Name="LblArr" Text="To" Margin="0,0,24,20" RelativePanel.Below="LblDep" RelativePanel.AlignLeftWith="LblDep"/>
+                                    <TextBox x:Name="TxtArr" Width="160" Margin="0,0,0,12" RelativePanel.Below="TxtDep" RelativePanel.AlignLeftWith="TxtDep"/>
+                                    <TextBlock x:Name="LblDepDate" Text="When?" Margin="0,0,24,20" RelativePanel.Below="LblArr" RelativePanel.AlignLeftWith="LblDep"/>
+                                    <TextBox x:Name="DPDepDate" Width="120" Margin="0,0,0,12" RelativePanel.Below="TxtArr" RelativePanel.AlignLeftWith="TxtDep"/>
+                                    <Button Background="{StaticResource DarkGreyBrush}" RelativePanel.Below="DPDepDate" RelativePanel.AlignLeftWith="TxtDep">
+                                        <TextBlock Text="Go!" FontFamily="{StaticResource DomusTitlingFont}" Foreground="{StaticResource EggshellBrush}" Margin="0,-6,0,0" />
+                                    </Button>
+                                </RelativePanel>
+
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                </RelativePanel>
+            </ScrollViewer>
+
+            
+        </SplitView>
+
+<Grid Height="32" HorizontalAlignment="Stretch" Background="{StaticResource BlueBrush}" VerticalAlignment="Top"> 
+	<Grid.ColumnDefinitions> 
+		<ColumnDefinition Width="48"/> 
+		<ColumnDefinition/> 
+	</Grid.ColumnDefinitions> 
+	<Button x:Name="PanelToggle" VerticalAlignment="Top" Background="#22000000" Height="32" Width="48"> 
+		<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"> 
+			<Rectangle Height="2" Width="18" Fill="{StaticResource EggshellBrush}"/> 
+			<Rectangle Height="2" Width="18" Fill="{StaticResource EggshellBrush}" Margin="0,2"/> 
+			<Rectangle Height="2" Width="18" Fill="{StaticResource EggshellBrush}"/> 
+		</StackPanel> 
+	</Button> 
+</Grid> 
+
+    </Grid>
+    
+    
+</Page>
