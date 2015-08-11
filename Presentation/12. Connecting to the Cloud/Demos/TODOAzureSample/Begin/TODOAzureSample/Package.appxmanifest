@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="7F99654C-4FCB-48D7-86C4-6042F5A569A7" Publisher="CN=anwigley" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="7F99654C-4FCB-48D7-86C4-6042F5A569A7" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="7C5FC377-6780-4C9B-80D9-62AF1BB691E4" Publisher="CN=anwigley" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="7C5FC377-6780-4C9B-80D9-62AF1BB691E4" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>TODO</DisplayName>
+    <DisplayName>TODO (Azure)</DisplayName>
     <PublisherDisplayName>andy</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

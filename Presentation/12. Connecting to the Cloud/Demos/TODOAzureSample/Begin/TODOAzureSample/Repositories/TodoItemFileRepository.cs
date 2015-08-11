@@ -7,6 +7,9 @@ using TODOAzureSample.Models;
 
 namespace TODOAzureSample.Repositories
 {
+    /// <summary>
+    /// This is no longer used in this sample - replaced by TodoItemAzureRepository
+    /// </summary>
     public class TodoItemFileRepository : ITodoItemRepository
     {
         List<Models.TodoItem> _cache;

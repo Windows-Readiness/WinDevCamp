@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -8,6 +9,20 @@ namespace TODOAzureSample
 {
     sealed partial class App : Common.BootStrapper
     {
+        // This MobileServiceClient has been configured to communicate with the Azure Mobile Service and
+        // Azure Gateway using the application key. You're all set to start working with your Mobile Service!
+        public static MobileServiceClient MobileService =
+            new MobileServiceClient(
+                "https://todocloud-code.azurewebsites.net",
+                "https://default-web-westeuropedadb315bf36143afbefc3a441bcf037b.azurewebsites.net",
+                "oKwqrFtryhTaNKqqSKJuUGHTGUVFOA28"
+            );
+
+        // Uncomment this code for configuring the MobileServiceClient to communicate with your local
+        // test project for debugging purposes.
+        //public static MobileServiceClient MobileService = new MobileServiceClient(
+        //    "http://localhost:50003"
+        //);
         public App() : base()
         {
             this.InitializeComponent();

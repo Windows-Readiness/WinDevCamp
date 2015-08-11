@@ -29,7 +29,8 @@ namespace TODOAzureSample.ViewModels
         #region Constructor
         public MainPageViewModel()
         {
-            _todoItemRepository = Repositories.TodoItemFileRepository.GetInstance();
+            //_todoItemRepository = Repositories.TodoItemFileRepository.GetInstance();
+            _todoItemRepository = Repositories.TodoItemAzureRepository.GetInstance();
 
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {

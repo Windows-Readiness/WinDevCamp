@@ -28,7 +28,8 @@ namespace TODOAzureSample.ViewModels
 
         public TodoItemViewModel()
         {
-            _todoItemRepository = Repositories.TodoItemFileRepository.GetInstance();
+            //_todoItemRepository = Repositories.TodoItemFileRepository.GetInstance();
+            _todoItemRepository = Repositories.TodoItemAzureRepository.GetInstance();
 
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
@@ -40,7 +41,8 @@ namespace TODOAzureSample.ViewModels
 
         public TodoItemViewModel(Models.TodoItem todo)
         {
-            _todoItemRepository = Repositories.TodoItemFileRepository.GetInstance();
+            //_todoItemRepository = Repositories.TodoItemFileRepository.GetInstance();
+            _todoItemRepository = Repositories.TodoItemAzureRepository.GetInstance();
 
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {

@@ -30,6 +30,7 @@ namespace TODOAzureSample.Models
         public bool IsFavorite { get { return _IsFavorite; } set { Set(ref _IsFavorite, value); } }
 
         private Uri _ImageUri = default(Uri);
+        [JsonIgnore]
         public Uri ImageUri
         {
             get { return _ImageUri; }
@@ -38,5 +39,31 @@ namespace TODOAzureSample.Models
                 Set(ref _ImageUri, value);
             }
         }
+
+        private string cloudImageUri = default(string);
+        [JsonProperty(PropertyName = "imageUri")]
+        public string CloudImageUri
+        {
+            get { return cloudImageUri; }
+            set
+            {
+                // Set a local image if the cloud service does not return an image uri string
+                string uri = value;
+                if (string.IsNullOrEmpty(uri)) uri = "ms-appx:///Images/Placeholder2.png";
+                ImageUri = new Uri(uri);
+            }
+        }
+
+        //[JsonProperty(PropertyName = "containerName")]
+        //public string ContainerName { get; set; }
+
+        //[JsonProperty(PropertyName = "resourceName")]
+        //public string ResourceName { get; set; }
+
+        //[JsonProperty(PropertyName = "sasQueryString")]
+        //public string SasQueryString { get; set; }
+
+        //[JsonIgnore]
+        //public string localImageUri { get; set; }
     }
 }
