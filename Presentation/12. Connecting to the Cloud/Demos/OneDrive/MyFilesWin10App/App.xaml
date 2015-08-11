@@ -1,0 +1,13 @@
+﻿<Application
+    x:Class="MyFilesWin10App.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyFilesWin10App"
+    RequestedTheme="Light">
+    <Application.Resources>
+        <x:String x:Key="ida:ClientID">4fff76f3-041a-4966-876f-62067ca3a3ea</x:String>
+        <x:String x:Key="ida:AADInstance">https://login.microsoftonline.com/</x:String>
+        <x:String x:Key="ida:Domain">rzdemos.onmicrosoft.com</x:String>
+    </Application.Resources>
+
+</Application>
