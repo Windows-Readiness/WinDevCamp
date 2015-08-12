@@ -10,9 +10,8 @@
 
     <Grid Background="{StaticResource EggshellBrush}">
         
-                <VisualStateManager.VisualStateGroups>
+        <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">
-
                      
                 <VisualState x:Name="NarrowState">
                     <VisualState.StateTriggers>
