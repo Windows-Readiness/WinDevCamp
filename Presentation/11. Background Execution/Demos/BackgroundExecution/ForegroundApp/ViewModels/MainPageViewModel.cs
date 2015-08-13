@@ -40,7 +40,7 @@ namespace Template10.ViewModels
             LoadCommand.Execute(null);
 
             // register background tasks
-            await BackgroundHelper.Register<MyUpdateTileTask>(new SystemTrigger(SystemTriggerType.TimeZoneChange, false));
+            await BackgroundHelper.Register<MyUpdateBadgeTask>(new SystemTrigger(SystemTriggerType.TimeZoneChange, false));
         }
 
         public override void OnNavigatedFrom(Dictionary<string, object> state, bool suspending)

@@ -63,6 +63,7 @@ namespace Template10
             {
                 VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch,
                 HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch,
+                Background=new SolidColorBrush(Colors.Red),
             };
             var star = new FontIcon
             {
