@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.2">
+  <CommandSet xml:lang="en-us" Name="CommandSet_en-us">
+    <AppName> To Do </AppName>
+    <Example> What's on my To Do </Example>
+
+    <Command Name="show">
+      <Example> Show my To Do </Example>
+      <ListenFor RequireAppName="ExplicitlySpecified"> Show my {builtin:AppName}</ListenFor>
+      <Feedback> On it </Feedback>
+      <Navigate/>
+    </Command>
+
+    <Command Name="what">
+      <Example> What's on my To Do </Example>
+      <ListenFor RequireAppName="ExplicitlySpecified"> What's on my {builtin:AppName}</ListenFor>
+      <ListenFor RequireAppName="ExplicitlySpecified"> What are my {builtin:AppName}?</ListenFor>
+      <VoiceCommandService Target="VoiceServiceEndpoint"/>
+    </Command>
+
+    <Command Name="new">
+      <Example>Add a meeting with Nikola on my To Do</Example>
+      <ListenFor RequireAppName="ExplicitlySpecified" >Add {todo} to my {builtin:AppName}</ListenFor>
+      <VoiceCommandService Target="VoiceServiceEndpoint" />
+    </Command>
+
+    <PhraseTopic Label="todo" Scenario="Natural Language" />
+    
+  </CommandSet>
+
+</VoiceCommands>

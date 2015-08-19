@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="TODOAdaptiveUISample.Views.ToDoEditorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TODOAdaptiveUISample.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:TODOAdaptiveUISample.ViewModels"
+    mc:Ignorable="d">
+
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.Content>
+                <Grid/>
+            </CommandBar.Content>
+            <AppBarButton x:Name="DeleteAppBarButton" Icon="Delete" Label="delete" Command="{Binding RemoveItemCommand}"/>                  
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Page.DataContext>
+        <vm:TodoItemViewModel />
+    </Page.DataContext>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <TextBlock Text="Edit ToDo Item" Style="{StaticResource HeaderTextBlockStyle}" Margin="12,0,0,12"/>
+        </Grid>
+        <Grid Grid.Row="1" Margin="12,0,12,0" MaxWidth="400">
+            <ScrollViewer>
+                <StackPanel>
+                    <RelativePanel Width="296" HorizontalAlignment="Center">
+                        <!-- item checked -->
+                        <CheckBox IsChecked="{Binding TodoItem.IsComplete, Mode=TwoWay}" Height="32" Width="32" 
+                                        Content="Is Complete?" HorizontalAlignment="Left"/>
+                        <!-- item star -->
+                        <CheckBox IsChecked="{Binding TodoItem.IsFavorite, Mode=TwoWay}" Height="32" Width="32"  
+                                        Style="{StaticResource StarCheckBoxStyle}" RelativePanel.AlignRightWithPanel="True"/>
+                    </RelativePanel>
+
+                    <!-- Image -->
+                    <Image  Source="{Binding TodoItem.ImageUri}" Width="296" Height="180" Stretch="UniformToFill"/>
+
+                    <RelativePanel Width="296">
+                        <AppBarButton x:Name="TakePictureButton" Icon="Camera" Label="photo" Command="{Binding TakePictureCommand}"
+                                      RelativePanel.LeftOf="SelectPictureButton"/>
+                        <AppBarButton x:Name="SelectPictureButton" Icon="Pictures" Label="select" Command="{Binding SelectPictureCommand}"
+                                      RelativePanel.AlignRightWithPanel="True"/>
+                    </RelativePanel>
+
+                    <!-- item details -->
+                    <TextBox Width="296" Header="Title" Text="{Binding TodoItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                    Margin="0,12,0,0" />
+                    <TextBox Width="296" Height="96" Margin="0,12,0,0" Header="Details" 
+                                    Text="{Binding TodoItem.Details, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <DatePicker Width="296" Margin="0,12,0,0" Header="Due Date" 
+                                Date="{Binding TodoItem.DueDate, Mode=TwoWay, Converter={StaticResource DateTimeToDateTimeOffsetConverter}}" 
+                                HorizontalAlignment="Center" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+    </Grid>
+</Page>

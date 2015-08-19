@@ -1,0 +1,145 @@
+﻿<Page
+    x:Class="TODOAdaptiveUISample.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TODOAdaptiveUISample.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:TODOAdaptiveUISample.ViewModels"
+    xmlns:views="using:TODOAdaptiveUISample.Views"
+    xmlns:models="using:TODOAdaptiveUISample.Models"
+    x:Name="ThisPage" 
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:MainPageViewModel />
+    </Page.DataContext>
+
+    <Grid >
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="VisualStateMin0">
+                    <VisualState.Setters>
+                        <Setter Target="InlineToDoItemViewGrid.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="InlineViewerBackground.(UIElement.Visibility)" Value="Collapsed"/>
+                        <Setter Target="ListViewGrid.(Grid.ColumnSpan)" Value="2"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="VisualStateMin800">
+                    <VisualState.Setters>
+                        <Setter Target="InlineViewerBackground.(UIElement.Visibility)" Value="Collapsed"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="VisualStateMin1200">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1200"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Rectangle Margin="0" >
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF08C7EB" Offset="0.005"/>
+                    <GradientStop Color="LightBlue" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <TextBlock Text="Picture ToDo" x:Name="AppTitle" Style="{StaticResource TitleTextBlockStyle}" 
+                   Margin="24"/>
+
+        <Grid Grid.Row="2">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity=".1" />
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            
+            
+            <Grid x:Name="ListViewGrid" 
+                  AllowDrop="True" 
+                  DragOver="Grid_DragOver" 
+                  Drop="Grid_Drop" 
+                  DragLeave="Grid_DragLeave" 
+                  VerticalAlignment="Stretch" 
+                  Background="Transparent">
+                <ListView x:Name="ToDoListView" Padding="0,0,0,12" MaxWidth="980"
+                                IsItemClickEnabled="True" ItemClick="TodoItem_ItemClicked"
+                                ItemsSource="{Binding ItemVMs}" VerticalAlignment="Top" 
+                                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      SelectionChanged="TodoItem_SelectionChanged">
+                    <ListView.ItemContainerTransitions>
+                        <TransitionCollection>
+                            <AddDeleteThemeTransition />
+                        </TransitionCollection>
+                    </ListView.ItemContainerTransitions>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="24,0,0,0" />
+                            <Setter Property="Margin" Value="0,0,0,0" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.Header>
+                        <StackPanel Orientation="Horizontal" Margin="0,12,0,0" >
+                            <!-- create new item -->
+                            <TextBox KeyDown="TextBox_KeyDown" Width="240" PlaceholderText="Add a new task" 
+                                            Margin="24,0,0,12" Height="36" />
+                            <AppBarButton Icon="Accept" Loaded="AddNewItemConfirmButton_Loaded"
+                                                IsEnabled="False" Click="AddNewItemConfirmButton_Click" 
+                                                RenderTransformOrigin="0.5,0.5" Margin="0,-8,0,0">
+                                <AppBarButton.RenderTransform>
+                                    <CompositeTransform ScaleX="0.75" ScaleY="0.75"/>
+                                </AppBarButton.RenderTransform>
+                            </AppBarButton>
+                        </StackPanel>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <views:ListToDoItemUserControl/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Border x:Name="DropBackgrund" Background="#4C000000" Visibility="Collapsed">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" Foreground="White" TextAlignment="Center">
+                        <Run Text="&#xE011;" FontFamily="Segoe UI Symbol" FontSize="62"></Run><LineBreak></LineBreak>
+                        <Run>Drop to create a new item</Run>
+                    </TextBlock>
+                </Border>
+            </Grid>
+
+            <Rectangle x:Name="InlineViewerBackground" HorizontalAlignment="Stretch" Fill="LightBlue" 
+                       Grid.Column="1" />
+            <Grid x:Name="InlineToDoItemViewGrid" Background="LightBlue" Grid.Column="1" >
+                <views:ToDoItemFullViewUserControl x:Name="InlineViewerEditor" Margin="24" HorizontalAlignment="Center"/>
+            </Grid>
+        </Grid>
+
+        <!-- busy indicator -->
+        <Popup IsOpen="{Binding Busy}" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid Background="{ThemeResource ContentDialogBorderThemeBrush}" Height="100" Width="200">
+                <Grid.RenderTransform>
+                    <TranslateTransform X="-100" Y="-50" />
+                </Grid.RenderTransform>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ProgressRing VerticalAlignment="Center" IsActive="True" Foreground="{ThemeResource ContentDialogDimmingThemeBrush}" />
+                    <TextBlock Foreground="{ThemeResource ContentDialogDimmingThemeBrush}" Text="Loading" FontSize="22" FontWeight="Light" Margin="12,0,0,0" />
+                </StackPanel>
+            </Grid>
+        </Popup>
+
+    </Grid>
+</Page>

@@ -1,0 +1,126 @@
+﻿<UserControl
+    x:Class="TODOAdaptiveUISample.Views.InkNotesControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TODOAdaptiveUISample.Views"
+    xmlns:inkTools="using:Microsoft.Labs.InkToolbarControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <SplitView x:Name="splitView" PanePlacement="Right" DisplayMode="Overlay" IsPaneOpen="false" PaneBackground="#66FFFFFF">
+            <SplitView.Pane>
+                <Grid>
+                    <Button VerticalAlignment="Top" HorizontalAlignment="Right" Background="White" Click="CloseOptions">
+                        <TextBlock FontSize="32" FontFamily="Segoe UI Symbol" Foreground="#B200DFEA">&#xE013;</TextBlock>
+                    </Button>
+                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Text="Pen Type:"
+                            Grid.Row="0" Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Margin="0,10"/>
+                        <ComboBox
+                            x:Name="PenType"
+                            Grid.Row="0" Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Width="132" Height="Auto"
+                            SelectedIndex="0"
+                            SelectionChanged="OnPenTypeChanged">
+                            <ComboBoxItem Content="Ballpoint"/>
+                            <ComboBoxItem Content="Highlighter"/>
+                            <ComboBoxItem Content="Calligraphy"/>
+                        </ComboBox>
+
+                        <TextBlock
+                            Text="Pen Thickness:"
+                            Grid.Row="1" Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Margin="0,10"/>
+                        <ComboBox
+                            x:Name="PenThickness"
+                            Grid.Row="1" Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Width="132" Height="Auto"
+                            SelectedIndex="1"
+                            SelectionChanged="OnPenThicknessChanged">
+                            <ComboBoxItem Content="Smallest"/>
+                            <ComboBoxItem Content="Small"/>
+                            <ComboBoxItem Content="Medium"/>
+                            <ComboBoxItem Content="Large"/>
+                            <ComboBoxItem Content="Largest"/>
+                        </ComboBox>
+
+                        <TextBlock
+                            Text="Color:"
+                            Grid.Row="2" Grid.Column="0"
+                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                            Margin="0,5"/>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                            <Button Background="Red"    Foreground="Red"    Click="OnPenColorChanged" Style="{StaticResource ColorButtonStyle}" Margin="0,0,3,0"/>
+                            <Button Background="Green"  Foreground="Green"  Click="OnPenColorChanged" Style="{StaticResource ColorButtonStyle}" Margin="0,0,3,0"/>
+                            <Button Background="Blue"   Foreground="Blue"   Click="OnPenColorChanged" Style="{StaticResource ColorButtonStyle}" Margin="0,0,3,0"/>
+                            <Button Background="Yellow" Foreground="Yellow" Click="OnPenColorChanged" Style="{StaticResource ColorButtonStyle}" Margin="0,0,3,0"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="0,5" Orientation="Horizontal">
+                            <Button Content="Clear" Width="65" Margin="0,0,3,0" Click="OnClear"/>
+                            <CheckBox Content="Erase" Margin="10,0,3,0" Checked="ErasingModeCheckBox_Checked" Unchecked="ErasingModeCheckBox_Unchecked"/>
+                            <Button Click="Reco_Click" Content="Recognize"  Margin="0,0,3,0"></Button>
+                        </StackPanel>
+                        <TextBlock x:Name="recoResult" Grid.Row="4" Grid.ColumnSpan="2" TextWrapping="Wrap" Margin="5"></TextBlock>
+                    </Grid>
+
+                    <!-- Button panel -->
+                    
+                </Grid>
+            </SplitView.Pane>
+            <Grid>
+                
+                
+                
+                
+                <ScrollViewer ZoomMode="Enabled" MinZoomFactor="1" VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto" Grid.Row="1">
+                    <Grid x:Name="outputGrid" Background="{ThemeResource SystemControlBackgroundChromeWhiteBrush}">
+                        <!--<Canvas x:Name="justACanvas" />-->
+                        
+                        
+                        
+                        <!-- Inking area -->
+                        <InkCanvas x:Name="inkCanvas"/>
+
+                        
+                        
+                        
+                        <!--https://visualstudiogallery.msdn.microsoft.com/58194dfe-df44-4c4e-893a-1eca40675269-->
+                        <!--<inkTools:InkToolbar TargetInkCanvas="{x:Bind inkCanvas}" VerticalAlignment="Top" HorizontalAlignment="Left"></inkTools:InkToolbar>-->
+                    </Grid>
+                </ScrollViewer>
+
+
+
+
+                <Button VerticalAlignment="Top" HorizontalAlignment="Right" Background="Transparent" Click="OpenOptions">
+                    <TextBlock FontSize="32" FontFamily="Segoe UI Symbol" Foreground="#B200DFEA">&#xE012;</TextBlock>
+                </Button>
+            </Grid>
+           
+
+        </SplitView>
+        
+    </Grid>
+</UserControl>
