@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TODOAdaptiveUISample.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,6 +23,26 @@ namespace TODOAdaptiveUISample.Views
         public ListToDoItemUserControl()
         {
             this.InitializeComponent();
+        }
+
+        private void Left_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Touch) return;
+            if (DataContext != null)
+            {
+                (DataContext as TodoItemViewModel).ToggleCompletedCommand.Execute(null);
+            }
+            e.Handled = true;
+        }
+
+        private void Right_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Touch) return;
+            if (DataContext != null)
+            {
+                (DataContext as TodoItemViewModel).ToggleFavoriteCommand.Execute(null);
+            }
+            e.Handled = true;
         }
     }
 }

@@ -3,13 +3,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TODOAdaptiveUISample.Views"
+    xmlns:comet="using:Comet.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
+    d:DesignHeight="40"
     d:DesignWidth="400">
 
-    <Grid Height="48">
+    <Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
                 <VisualState x:Name="VisualStateMinWidth500">
@@ -19,8 +20,8 @@
                 </VisualState>
                 <VisualState x:Name="VisualStateMinWidth0">
                     <VisualState.Setters>
-                        <Setter Target="image.(UIElement.Visibility)" Value="Collapsed"/>
-                        <Setter Target="textBlock.(FrameworkElement.MaxWidth)" Value="270"/>
+                        <Setter Target="dueDate.Visibility" Value="Collapsed"/>
+                        <Setter Target="textBlock.FontSize" Value="18"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="1"/>
@@ -28,25 +29,83 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="42" />
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*" MaxWidth="440" />
-            <ColumnDefinition Width="48" />
-        </Grid.ColumnDefinitions>
 
-        <!-- item checked -->
-        <CheckBox IsChecked="{Binding TodoItem.IsComplete, Mode=TwoWay}" Grid.Column="0" VerticalAlignment="Center" Height="32" Width="32" />
-        <!-- item image -->
-        <Image x:Name="image" Grid.Column="1" Height="40" Width="60" Margin="0,0,12,0" Source="{Binding TodoItem.ImageUri}"/>
-        <!-- item title -->
-        <TextBlock x:Name="textBlock" Grid.Column="2" VerticalAlignment="Center" Foreground="Black" 
-                   Text="{Binding TodoItem.Title}" FontWeight="Normal" LineHeight="20" TextWrapping="Wrap" />
-        <!-- item strikethrough -->
-        <Line Visibility="{Binding TodoItem.IsComplete, Converter={StaticResource VisibleWhenTrueConverter}}" Grid.Column="2" Stretch="Fill" Stroke="Black" StrokeThickness="1" X1="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,24,0" />
-        <!-- item star -->
-        <CheckBox IsChecked="{Binding TodoItem.IsFavorite, Mode=TwoWay}" Grid.Column="3" VerticalAlignment="Center" Height="32" Width="32" Style="{StaticResource StarCheckBoxStyle}" />
 
+        <comet:SlidableListItem Background="Transparent" 
+                                
+                                LeftCommandBackground="Gray" 
+                                LeftIcon="Accept" 
+                                LeftLabel="Complete Toggle" 
+                                LeftCommand="{Binding ToggleCompletedCommand}"
+                                
+                                RightCommandBackground="Gray" 
+                                RightIcon="Favorite" 
+                                RightLabel="Toggle Favorite"
+                                RightCommand="{Binding ToggleFavoriteCommand}"
+                                RightCommandForeground="{Binding TodoItem.IsFavorite, Converter={StaticResource GoldWhenFavoriteConverter}}"
+                                
+                                ActivationWidth="150">
+            <Grid Height="40">
+                <Canvas >
+                    <Path Data="M0,0 L0,8 L24,40 L40,40 L40,0" Fill="{Binding TodoItem.Color, Converter={StaticResource HexToSolidColorBrushConverter}}"></Path>
+                    <Path Tapped="Left_Tapped" Data="M0,8 L0,40 L24,40" Fill="Transparent"></Path>
+                </Canvas>
+
+                <Canvas HorizontalAlignment="Right" Width="40">
+                    <Path Data="M0,0 L0,40 L40,40 L40,32 L16,0" Fill="{Binding TodoItem.Color, Converter={StaticResource HexToSolidColorBrushConverter}}"></Path>
+                    <Path Tapped="Right_Tapped" Data="M16,0 L40,0 L40,32" Fill="Transparent"></Path>
+                </Canvas>
+                
+                <Border BorderThickness="0" 
+                        Margin="25,0,25,0" 
+                        BorderBrush="#99FFFFFF" 
+                        HorizontalAlignment="Stretch" 
+                        Background="{Binding TodoItem.Color, Converter={StaticResource HexToSolidColorBrushConverter}}" />
+                
+                <TextBlock x:Name="textBlock" 
+                           Foreground="White" 
+                           Text="{Binding TodoItem.Title}" 
+                           FontWeight="Normal" 
+                           FontSize="24" 
+                           TextWrapping="NoWrap" 
+                           Margin="18,0,18,0" 
+                           VerticalAlignment="Center" 
+                           TextTrimming="CharacterEllipsis" />
+                
+                <TextBlock x:Name="dueDate"
+                           Foreground="White"
+                           Text="{Binding TodoItem.DueDate, Converter={StaticResource DateTimeToHumanReadableConverter}}"
+                           Margin="0,2,26,2"
+                           HorizontalAlignment="Right"
+                           FontSize="11" />
+
+                <Grid IsHitTestVisible="False" 
+                        Visibility="{Binding TodoItem.IsComplete, Converter={StaticResource VisibleWhenTrueConverter}}" 
+                        >
+                    <Canvas>
+                        <Path Data="M0,0 L0,8 L24,40 L25,40 L25,0" Fill="#CC838383"></Path>
+                    </Canvas>
+                    <Canvas HorizontalAlignment="Right" Width="25">
+                        <Path Data="M0,0 L0,40 L25,40 L25,32 L1,0" Fill="#CC838383"></Path>
+                    </Canvas>
+
+                    <Border BorderThickness="0" 
+                        Margin="25,0,25,0" 
+                        HorizontalAlignment="Stretch" 
+                        Background="#CC838383" />
+                    
+                    <Line 
+                      Stretch="Fill" 
+                      Margin="18,0,18,0" 
+                      Stroke="#CCF9F9F9" 
+                      StrokeThickness="1" 
+                      X1="1" 
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Stretch" />
+                </Grid>
+                
+            </Grid>
+        </comet:SlidableListItem>
     </Grid>
 
 </UserControl>

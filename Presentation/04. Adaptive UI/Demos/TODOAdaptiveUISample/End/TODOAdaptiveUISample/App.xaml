@@ -14,6 +14,7 @@
             <c:HexToSolidColorBrushConverter x:Name="HexToSolidColorBrushConverter" />
             <c:DateTimeFormatConverter x:Name="DateTimeFormatConverter" />
             <c:DateTimeToDateTimeOffsetConverter x:Name="DateTimeToDateTimeOffsetConverter" />
+            <c:DateTimeToHumanReadableConverter x:Name="DateTimeToHumanReadableConverter" />
 
             <c:ValueWhenConverter x:Name="VisibleWhenZeroConverter">
                 <c:ValueWhenConverter.When>
@@ -38,6 +39,19 @@
                     <Visibility>Collapsed</Visibility>
                 </c:ValueWhenConverter.Otherwise>
             </c:ValueWhenConverter>
+
+            <c:ValueWhenConverter x:Name="GoldWhenFavoriteConverter">
+                <c:ValueWhenConverter.When>
+                    <x:Boolean>true</x:Boolean>
+                </c:ValueWhenConverter.When>
+                <c:ValueWhenConverter.Value>
+                    <SolidColorBrush>Gold</SolidColorBrush>
+                </c:ValueWhenConverter.Value>
+                <c:ValueWhenConverter.Otherwise>
+                    <SolidColorBrush>White</SolidColorBrush>
+                </c:ValueWhenConverter.Otherwise>
+            </c:ValueWhenConverter>
+
             <Style x:Key="NewItemTextBoxStyle" TargetType="TextBox">
                 <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
                 <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}"/>
@@ -348,7 +362,7 @@
             </Style>
             <Style x:Key="ItemContainerStyles" TargetType="ListViewItem">
                 <Setter Property="Padding" Value="0" />
-                <Setter Property="Margin" Value="0,0,0,0" />
+                <Setter Property="Margin" Value="8,1,8,1" />
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             </Style>
         </ResourceDictionary>

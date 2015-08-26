@@ -4,6 +4,7 @@ using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 namespace TODOAdaptiveUISample.Views
 {
@@ -14,25 +15,26 @@ namespace TODOAdaptiveUISample.Views
             this.InitializeComponent();
             this.ViewModel = this.DataContext as ViewModels.MainPageViewModel;
             var viewTitleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
-            viewTitleBar.BackgroundColor = Windows.UI.Colors.CornflowerBlue;
-            viewTitleBar.ButtonBackgroundColor = Windows.UI.Colors.CornflowerBlue;
+            
+            
+
+            var titleBar = CoreApplication.GetCurrentView().TitleBar;
+            //titleBar.ExtendViewIntoTitleBar = true;
+            //TitleBar.Height = titleBar.Height;
+            //Window.Current.SetTitleBar(TitleBar);
+
+            //viewTitleBar.BackgroundColor = Windows.UI.Colors.CornflowerBlue;
+            //viewTitleBar.ButtonBackgroundColor = Windows.UI.Colors.CornflowerBlue;
         }
 
         ViewModels.MainPageViewModel ViewModel { get; set; }
 
-        private void TodoItem_ItemClicked(object sender, ItemClickEventArgs e)
-        {
-            // If the inline panel is not showing, navigate to the separate editing page
-            if (InlineToDoItemViewGrid.Visibility == Visibility.Collapsed)
-            {
-                ((App)(Application.Current)).NavigationService.Navigate(typeof(ToDoEditorPage), ((TodoItemViewModel)e.ClickedItem).TodoItem.Id);
-            }
-        }
-
-        private void TodoItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        // using a tapped event so we can have hitable areas inside the listviewitem without
+        // actualy selecting the item
+        private void TodoItem_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             // If the inline viewer is visible, set the data context to the selected item
-            if (e.AddedItems != null && InlineToDoItemViewGrid.Visibility == Visibility.Visible)
+            if (InlineToDoItemViewGrid.Visibility == Visibility.Visible && (sender as Border).DataContext != null)
             {
                 // First save changes on the previous one
                 // TODO add a 'Dirty' flag to the ViewModel so we only save changes if there is something to save
@@ -41,7 +43,13 @@ namespace TODOAdaptiveUISample.Views
                     vm.UpdateItemCommand.Execute(vm.TodoItem);
 
                 // Set to the new item
-                InlineViewerEditor.DataContext = e.AddedItems[0];
+                InlineViewerEditor.DataContext = (sender as Border).DataContext;
+            }
+
+            // If the inline panel is not showing, navigate to the separate editing page
+            if (InlineToDoItemViewGrid.Visibility == Visibility.Collapsed && (sender as Border).DataContext != null)
+            {
+                ((App)(Application.Current)).NavigationService.Navigate(typeof(ToDoEditorPage), ((TodoItemViewModel)(sender as Border).DataContext).TodoItem.Id);
             }
         }
 
@@ -102,5 +110,7 @@ namespace TODOAdaptiveUISample.Views
                 CreateNewToDoItem(NewToDoItemNameTextBox);
             }
         }
+
+        
     }
 }

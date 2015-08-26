@@ -155,6 +155,22 @@ namespace TODOAdaptiveUISample.ViewModels
             await _todoItemRepository.UpdateTodoItem(this.TodoItem);
         }
 
+        Mvvm.Command _ToggleCompletedCommand = default(Mvvm.Command);
+        public Mvvm.Command ToggleCompletedCommand { get { return _ToggleCompletedCommand ?? (_ToggleCompletedCommand = new Mvvm.Command(ExecuteToggleCompletedCommand, CanExecuteToggleCompletedCommand)); } }
+        private bool CanExecuteToggleCompletedCommand() { return !Busy; }
+        private  void ExecuteToggleCompletedCommand()
+        {
+            this.TodoItem.IsComplete = !this.TodoItem.IsComplete;
+        }
+
+        Mvvm.Command _ToggleFavoriteCommand = default(Mvvm.Command);
+        public Mvvm.Command ToggleFavoriteCommand { get { return _ToggleFavoriteCommand ?? (_ToggleFavoriteCommand = new Mvvm.Command(ExecuteToggleFavoriteCommand, CanExecuteToggleFavoriteCommand)); } }
+        private bool CanExecuteToggleFavoriteCommand() { return !Busy; }
+        private void ExecuteToggleFavoriteCommand()
+        {
+            this.TodoItem.IsFavorite = !this.TodoItem.IsFavorite;
+        }
+
         #endregion  
     }
 }
