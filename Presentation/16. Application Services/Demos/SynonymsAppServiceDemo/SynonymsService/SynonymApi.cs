@@ -22,7 +22,7 @@ namespace SynonymsService
         {
             if (string.IsNullOrEmpty(apiKey))
             {
-                throw new ArgumentException("Sorry, I think they make you have a key for this API");
+                throw new ArgumentException("Sorry, you must register at https://datamarket.azure.com/dataset/bing/synonyms for a key for this API");
             }
             this.apiKey = apiKey;
         }

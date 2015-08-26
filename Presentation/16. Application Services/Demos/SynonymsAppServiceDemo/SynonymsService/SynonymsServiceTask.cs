@@ -14,8 +14,8 @@ namespace SynonymsService
   {
     private static BackgroundTaskDeferral _serviceDeferral;
 
-    //#error You need a bing api key
-    static readonly string BING_KEY = "kv/Q1cvCsXV1kf+kTshGAp1JOobmT6AsvEO4prq6zb4=";
+        #error You need a bing api key - register at https://datamarket.azure.com/dataset/bing/synonyms
+        static readonly string BING_KEY = "";
 
     public void Run(IBackgroundTaskInstance taskInstance)
     {
