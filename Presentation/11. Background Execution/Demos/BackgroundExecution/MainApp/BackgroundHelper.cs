@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Template10;
 using Windows.ApplicationModel.Background;
 
-namespace Template10
+namespace MainApp
 {
     public static class BackgroundHelper
     {
