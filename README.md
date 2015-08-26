@@ -7,7 +7,7 @@ This developer training for Windows 10 is based on the two day online on-demand 
 
 Suggested agenda for a 1 day Windows 10 Dev Camp
 
-1. Introduction to UWP | [Presentation] (https://github.com/Windows-Readiness/WinDevCamp/blob/master/Presentation/01.%20Introduction%20to%20UWP/01-UWPOverview.pptx)
+1. Introduction to UWP | [Presentation] (60 minutes) (https://github.com/Windows-Readiness/WinDevCamp/blob/master/Presentation/01.%20Introduction%20to%20UWP/01-UWPOverview.pptx)
 2. Adaptive UI
 3. Live Tiles & Notifications
 4. Edge & Hosted Web Apps
