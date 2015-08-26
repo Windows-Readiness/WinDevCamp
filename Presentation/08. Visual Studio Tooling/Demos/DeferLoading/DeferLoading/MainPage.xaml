@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="DeferLoading.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DeferLoading"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200" />
+            <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+        <Border x:Name="Red" Grid.Row="0" Grid.Column="0" Margin="5" Background="#F04E1F" />
+        <Border x:Name="Green" Grid.Row="0" Grid.Column="1" Margin="5" Background="#7DB700" />
+        <Border x:Name="Blue" Grid.Row="1" Grid.Column="0" Margin="5" Background="#00A1EE" />
+        <Border x:Name="Yellow" Grid.Row="1" Grid.Column="1" Margin="5" Background="#FDB900" />
+
+        <!--<Button Click="Button_Click" Content="Load" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="36" />-->
+    </Grid>
+</Page>

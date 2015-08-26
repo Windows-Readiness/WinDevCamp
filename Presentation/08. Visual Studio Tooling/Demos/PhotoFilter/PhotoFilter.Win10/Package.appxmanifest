@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+  <Identity Name="199e895c-2d51-4e5d-8ae9-db65ed5e1056" Publisher="CN=dantaylo" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="199e895c-2d51-4e5d-8ae9-db65ed5e1056" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>PhotoFilter.Win10</DisplayName>
+    <PublisherDisplayName>dantaylo</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10053.0" MaxVersionTested="10.0.10053.0" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="PhotoFilter.Win10.App">
+      <uap:VisualElements DisplayName="PhotoFilter.Win10" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="PhotoFilter.Win10" BackgroundColor="#464646">
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <!--<Capability Name="picturesLibrary" />-->
+    <uap:Capability Name="picturesLibrary" />
+  </Capabilities>
+</Package>

@@ -1,0 +1,75 @@
+﻿<Page
+    x:Class="PhotoFilter.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PhotoFilter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="NormalImageTemplate">
+            <Grid Height="75">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="1"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="10"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Source="{Binding Photo}" Height="75" Width="75" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1"></Image>
+                <TextBlock Text="{Binding FolderName}" HorizontalAlignment="Left" FontWeight="Bold"  Grid.Column="3" Grid.Row="2"/>
+                <TextBlock Text="{Binding Name}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="3"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <CollectionViewSource x:Name="ImageListSource" IsSourceGrouped="false"/>
+            <SolidColorBrush x:Name="textColor" Color="White"></SolidColorBrush>
+            <SolidColorBrush x:Name="backgroundColor" Color="Black"></SolidColorBrush>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="pictureList" 
+                 ItemsSource="{Binding Source={StaticResource ImageListSource}}" 
+                 SelectionChanged="pictureList_SelectionChanged"
+                 Width="350" 
+                 Grid.Column="0">
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Key}" FontWeight="Bold" />
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListBox.GroupStyle>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl x:Name="cc" Content="{Binding}" ContentTemplate="{StaticResource NormalImageTemplate}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Column="2">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="buttonSync" Content="Filter" Click="buttonSync_Click"></Button>
+            </StackPanel>
+            <ProgressBar Name="progressBar" IsIndeterminate="True"></ProgressBar>
+            <Image x:Name="imgSelectedImage" Visibility="Collapsed"></Image>
+        </Grid>
+    </Grid>
+</Page>

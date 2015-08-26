@@ -1,0 +1,32 @@
+﻿<Window x:Class="PhotoFilter.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="545" Width="806">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" x:Name="FullImage" />
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Button x:Name="ProcessingButton" Content="Start Background Processing" Click="ProcessingButton_Click" Margin="10,0,5,0"/>
+            <Label x:Name="ProcessingStatus" Content="Processing Images in the background..." Width="221" Margin="5,0,5,0" Visibility="Collapsed" />
+        </StackPanel>
+
+        <ListView x:Name="MainListView"
+            VirtualizingPanel.IsVirtualizing="True"
+            VirtualizingPanel.IsContainerVirtualizable="True" Margin="11,10,9,10" ItemsSource="{Binding Images}" MouseDoubleClick="MainListView_MouseDoubleClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Height="120">
+                        <Image Width="150" Height="150" Source="{Binding Image}" />
+                        <StackPanel>
+                            <TextBlock Padding="10,30,0,0" FontSize="18" Text="{Binding Name}"/>
+                            <TextBlock Padding="10,10,0,0" FontSize="18" Text="{Binding Uri}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
