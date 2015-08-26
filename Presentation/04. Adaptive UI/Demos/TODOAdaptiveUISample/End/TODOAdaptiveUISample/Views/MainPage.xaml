@@ -10,12 +10,19 @@
     xmlns:models="using:TODOAdaptiveUISample.Models"
     x:Name="ThisPage" 
     mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="ItemContainerStyle" TargetType="ListViewItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style>
+    </Page.Resources>
 
     <Page.DataContext>
         <vm:MainPageViewModel />
     </Page.DataContext>
 
-    <Grid>
+    <Grid Background="#FFDEDEDE">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="VisualStateGroup">
                 <VisualState x:Name="VisualStateMin0">
@@ -47,59 +54,65 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Rectangle Margin="0" >
-            <Rectangle.Fill>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF08C7EB" Offset="0.005"/>
-                    <GradientStop Color="LightBlue" Offset="1"/>
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-        <TextBlock Text="Picture ToDo" x:Name="AppTitle" Style="{StaticResource TitleTextBlockStyle}" 
-                   Margin="24"/>
+        <Rectangle Margin="0" />
+        <TextBlock Text="picture todo" x:Name="AppTitle" Style="{StaticResource TitleTextBlockStyle}" 
+                   Margin="24,10,24,5" Foreground="Black" FontFamily="Segoe UI Semilight" TextAlignment="Center"/>
 
         <Grid Grid.Row="2">
-            <Grid.Background>
-                <SolidColorBrush Color="Black" Opacity=".1" />
-            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ListView x:Name="ToDoListView" Padding="0,0,0,12" MaxWidth="980"
+            <ListView x:Name="ToDoListView" Padding="0,0,0,12"
                                 IsItemClickEnabled="True" ItemClick="TodoItem_ItemClicked"
                                 ItemsSource="{Binding ItemVMs}" VerticalAlignment="Top" 
                                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                      SelectionChanged="TodoItem_SelectionChanged">
+                      SelectionChanged="TodoItem_SelectionChanged" ItemContainerStyle="{StaticResource ItemContainerStyles}">
                 <ListView.ItemContainerTransitions>
                     <TransitionCollection>
                         <AddDeleteThemeTransition />
                     </TransitionCollection>
                 </ListView.ItemContainerTransitions>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Padding" Value="24,0,0,0" />
-                        <Setter Property="Margin" Value="0,0,0,0" />
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
                 <ListView.Header>
-                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0" >
-                        <!-- create new item -->
-                        <TextBox KeyDown="TextBox_KeyDown" Width="240" PlaceholderText="Add a new task" 
-                                            Margin="24,0,0,12" Height="36" />
-                        <AppBarButton Icon="Accept" Loaded="AddNewItemConfirmButton_Loaded"
-                                                IsEnabled="False" Click="AddNewItemConfirmButton_Click" 
-                                                RenderTransformOrigin="0.5,0.5" Margin="0,-8,0,0">
-                            <AppBarButton.RenderTransform>
-                                <CompositeTransform ScaleX="0.75" ScaleY="0.75"/>
-                            </AppBarButton.RenderTransform>
-                        </AppBarButton>
-                    </StackPanel>
+                    <Border Height="40" Margin="0" BorderBrush="#66838383" BorderThickness="0,1" >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <!-- create new item -->
+                            <TextBox KeyDown="TextBox_KeyDown" PlaceholderText="Add a new task" 
+            					Style="{StaticResource NewItemTextBoxStyle}" Width="280" Foreground="#FF383838" FontSize="18.667" />
+                            <AppBarButton Icon="Accept" Loaded="AddNewItemConfirmButton_Loaded"
+            					IsEnabled="False" Click="AddNewItemConfirmButton_Click" 
+            					RenderTransformOrigin="0.5,0.5" Width="64" Style="{StaticResource AddItemButtonStyle}">
+                                <AppBarButton.RenderTransform>
+                                    <CompositeTransform ScaleX="0.75" ScaleY="0.75"/>
+                                </AppBarButton.RenderTransform>
+                            </AppBarButton>
+                        </StackPanel>
+                    </Border>
                 </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <views:ListToDoItemUserControl/>
+                        <Grid Height="40">
+                            <Border BorderThickness="0" BorderBrush="#99FFFFFF" HorizontalAlignment="Stretch" Background="{Binding TodoItem.Color, Converter={StaticResource HexToSolidColorBrushConverter}}"></Border>
+                            <views:ListToDoItemUserControl Visibility="Collapsed"/>
+                            <Button x:Name="button" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource ItemFunctionButtonStyle}" BorderThickness="0">
+                                <Canvas Width="40" Height="40" HorizontalAlignment="Left">
+                                    <Path Data="M0,8 L0,40 L24,40" Fill="Gray"/>
+                                    <Path x:Name="Line" Width="1.333" Height="14.462" Canvas.Left="10.952" Canvas.Top="25.787" Stretch="Fill" StrokeThickness="3" StrokeLineJoin="Round" Stroke="White" Data="F1 M 10.7485,10.7619L 10.7485,27.0005" RenderTransformOrigin="0.5,0.5">
+                                        <Path.RenderTransform>
+                                            <CompositeTransform Rotation="53.231"/>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                    <Path x:Name="Line_4" Width="11.165" Height="1.333" Canvas.Left="1.526" Canvas.Top="33.159" Stretch="Fill" StrokeThickness="3" StrokeLineJoin="Round" Data="F1 M 2.6024,18.8813L 18.8944,18.8813" RenderTransformOrigin="0.5,0.5" Stroke="White">
+                                        <Path.RenderTransform>
+                                            <CompositeTransform Rotation="43.545"/>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                </Canvas>
+                            </Button>
+
+                            <!-- item title -->
+                            <TextBlock x:Name="textBlock" Foreground="White" Text="{Binding TodoItem.Title}" FontWeight="Normal" LineHeight="20" TextWrapping="NoWrap" Margin="24,0,0,0" VerticalAlignment="Center" />
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

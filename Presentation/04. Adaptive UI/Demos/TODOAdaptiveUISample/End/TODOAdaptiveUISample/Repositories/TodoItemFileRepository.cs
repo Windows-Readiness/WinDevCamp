@@ -81,8 +81,10 @@ namespace TODOAdaptiveUISample.Repositories
                 IsComplete = complete ?? false,
                 Title = title ?? string.Empty,
                 ImageUri = imageUri,
-                DueDate = DateTime.Now.AddDays(7)
-            };
+                DueDate = DateTime.Now.AddDays(7),
+                Color = String.Format("#{0:X6}", (new Random()).Next(0x1000000))
+        };
+            
             return item;
         }
 

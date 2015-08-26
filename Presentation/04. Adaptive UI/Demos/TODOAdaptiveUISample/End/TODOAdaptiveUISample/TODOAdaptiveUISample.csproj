@@ -95,6 +95,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\BootStrapper.cs" />
+    <Compile Include="Converters\HexToSolidColorBrushConverter.cs" />
     <Compile Include="Converters\DateTimeToDateTimeOffsetConverter.cs" />
     <Compile Include="Converters\ValueWhenConverter.cs" />
     <Compile Include="Converters\DateTimeFormatConverter.cs" />

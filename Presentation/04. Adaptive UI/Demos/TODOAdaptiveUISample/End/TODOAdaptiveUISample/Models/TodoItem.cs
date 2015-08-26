@@ -29,6 +29,11 @@ namespace TODOAdaptiveUISample.Models
         [JsonProperty(PropertyName = "isFavorite")]
         public bool IsFavorite { get { return _IsFavorite; } set { Set(ref _IsFavorite, value); } }
 
+        private string _Color;
+        [JsonProperty(PropertyName = "color")]
+        public string Color { get { return _Color; } set { Set(ref _Color, value); } }
+
+
         private Uri _ImageUri = default(Uri);
         public Uri ImageUri
         {
