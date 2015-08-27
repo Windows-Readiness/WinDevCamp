@@ -144,7 +144,8 @@ namespace TODOAdaptiveUISample.ViewModels
             this.TodoItem = null;
 
             // Navigate back
-            ((App)App.Current).NavigationService.GoBack();
+            if (((App)App.Current).NavigationService.CanGoBack)
+                ((App)App.Current).NavigationService.GoBack();
         }
 
         Mvvm.Command<Models.TodoItem> _UpdateItemCommand = default(Mvvm.Command<Models.TodoItem>);

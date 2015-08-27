@@ -1,6 +1,7 @@
 ﻿using System;
 using TODOAdaptiveUISample.ViewModels;
 using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -25,6 +26,32 @@ namespace TODOAdaptiveUISample.Views
 
             //viewTitleBar.BackgroundColor = Windows.UI.Colors.CornflowerBlue;
             //viewTitleBar.ButtonBackgroundColor = Windows.UI.Colors.CornflowerBlue;
+
+            Window.Current.SizeChanged += Current_SizeChanged;
+        }
+
+        private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        {
+            if (e.Size.Width < 400)
+            {
+                splitView.OpenPaneLength = e.Size.Width - 20;
+            }
+            else if (splitView.OpenPaneLength != 400)
+            {
+                splitView.OpenPaneLength = 400;
+            }
+
+            if (e.Size.Width >= 600 && ToDoListView.SelectedItem == null)
+            {
+                try
+                {
+                    ToDoListView.SelectedIndex = 0;
+                }
+                catch
+                {
+
+                }
+            }
         }
 
         ViewModels.MainPageViewModel ViewModel { get; set; }
@@ -33,24 +60,34 @@ namespace TODOAdaptiveUISample.Views
         // actualy selecting the item
         private void TodoItem_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            // If the inline viewer is visible, set the data context to the selected item
-            if (InlineToDoItemViewGrid.Visibility == Visibility.Visible && (sender as Border).DataContext != null)
-            {
-                // First save changes on the previous one
-                // TODO add a 'Dirty' flag to the ViewModel so we only save changes if there is something to save
-                TodoItemViewModel vm = InlineViewerEditor.DataContext as TodoItemViewModel;
-                if (vm != null)
-                    vm.UpdateItemCommand.Execute(vm.TodoItem);
-
-                // Set to the new item
-                InlineViewerEditor.DataContext = (sender as Border).DataContext;
-            }
+            
 
             // If the inline panel is not showing, navigate to the separate editing page
-            if (InlineToDoItemViewGrid.Visibility == Visibility.Collapsed && (sender as Border).DataContext != null)
+            if ((sender as Border).DataContext != null)
             {
-                ((App)(Application.Current)).NavigationService.Navigate(typeof(ToDoEditorPage), ((TodoItemViewModel)(sender as Border).DataContext).TodoItem.Id);
+                ToDoListView.SelectedItem = ((TodoItemViewModel)(sender as Border).DataContext);
+                //((App)(Application.Current)).NavigationService.Navigate(typeof(ToDoEditorPage), ((TodoItemViewModel)(sender as Border).DataContext).TodoItem.Id);
             }
+        }
+
+        private void ToDoListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (InlineViewerEditor.DataContext != null && InlineViewerEditor.DataContext is TodoItemViewModel)
+            {
+                (InlineViewerEditor.DataContext as TodoItemViewModel).UpdateItemCommand.Execute(null);
+            }
+
+            if (ToDoListView.SelectedItem == null)
+            {
+                splitView.IsPaneOpen = false;
+                InlineViewerEditor.DataContext = null;
+            }
+            else
+            {
+                InlineViewerEditor.DataContext = ToDoListView.SelectedItem;
+                splitView.IsPaneOpen = true;
+            }
+            
         }
 
         private TextBox NewToDoItemNameTextBox = null;
@@ -111,6 +148,27 @@ namespace TODOAdaptiveUISample.Views
             }
         }
 
-        
+        private void splitView_PaneClosed(SplitView sender, object args)
+        {
+            if (Window.Current.Bounds.Width > 600)
+                try
+                {
+                    ToDoListView.SelectedIndex = 0;
+                }
+                catch{}
+            else
+                ToDoListView.SelectedItem = null;
+
+        }
+
+        private void InlineViewerEditor_DeleteItemClicked(object sender, EventArgs e)
+        {
+            if (InlineViewerEditor.DataContext != null && InlineViewerEditor.DataContext is TodoItemViewModel)
+            {
+                var vm = this.DataContext as MainPageViewModel;
+                vm.RemoveItemCommand.Execute(null);
+            }
+            
+        }
     }
 }

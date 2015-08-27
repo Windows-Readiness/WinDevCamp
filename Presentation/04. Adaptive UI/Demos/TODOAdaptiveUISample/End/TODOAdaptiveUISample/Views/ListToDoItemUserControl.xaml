@@ -44,7 +44,8 @@
                                 RightCommand="{Binding ToggleFavoriteCommand}"
                                 RightCommandForeground="{Binding TodoItem.IsFavorite, Converter={StaticResource GoldWhenFavoriteConverter}}"
                                 
-                                ActivationWidth="150">
+                                ActivationWidth="150"
+                                MouseSlidingEnabled="True">
             <Grid Height="40">
                 <Canvas >
                     <Path Data="M0,0 L0,8 L24,40 L40,40 L40,0" Fill="{Binding TodoItem.Color, Converter={StaticResource HexToSolidColorBrushConverter}}"></Path>

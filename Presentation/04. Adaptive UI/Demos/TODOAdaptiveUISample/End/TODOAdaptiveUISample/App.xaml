@@ -52,6 +52,18 @@
                 </c:ValueWhenConverter.Otherwise>
             </c:ValueWhenConverter>
 
+            <c:ValueWhenConverter x:Name="BooleanInverter">
+                <c:ValueWhenConverter.When>
+                    <x:Boolean>true</x:Boolean>
+                </c:ValueWhenConverter.When>
+                <c:ValueWhenConverter.Value>
+                    <x:Boolean>false</x:Boolean>
+                </c:ValueWhenConverter.Value>
+                <c:ValueWhenConverter.Otherwise>
+                    <x:Boolean>true</x:Boolean>
+                </c:ValueWhenConverter.Otherwise>
+            </c:ValueWhenConverter>
+
             <Style x:Key="NewItemTextBoxStyle" TargetType="TextBox">
                 <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
                 <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}"/>

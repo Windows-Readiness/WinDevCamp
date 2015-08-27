@@ -10,36 +10,57 @@
     d:DesignHeight="550"
     d:DesignWidth="400"
     d:DataContext="vm:TodoItemViewModel">
- 
+
     <Grid>
-        <ScrollViewer>
-            <StackPanel Margin="0,0,24,0">
-                <TextBox Width="300" Header="Title" Text="{Binding TodoItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                         Margin="0,12,0,12" />
-                <RelativePanel Margin="0" Width="296">
-                    <!-- item star -->
-                    <CheckBox IsChecked="{Binding TodoItem.IsFavorite, Mode=TwoWay}" Height="32" Width="32"  
-                                            Style="{StaticResource StarCheckBoxStyle}" HorizontalAlignment="Left"/>
-                    <!-- item checked -->
-                    <CheckBox IsChecked="{Binding TodoItem.IsComplete, Mode=TwoWay}" Height="32" Width="32" 
-                                            Content="Is Complete?" RelativePanel.AlignRightWithPanel="True" />
-                </RelativePanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.RowSpan="2" Padding="0,0,0,48" 
+                      HorizontalScrollBarVisibility="Disabled" 
+                      HorizontalScrollMode="Disabled" 
+                      VerticalScrollMode="Auto" 
+                      VerticalScrollBarVisibility="Auto">
+            <Grid Background="Gray">
+                <StackPanel >
+                    <Grid>
 
-                <!-- Image -->
-                <Image  Source="{Binding TodoItem.ImageUri}" Width="300" Height="180" Stretch="UniformToFill"/>
+                        <Image Source="{Binding TodoItem.ImageUri}" VerticalAlignment="Top" Height="250" Stretch="UniformToFill" />
+                        <Border VerticalAlignment="Stretch" Background="#4C000000" />
+                        <StackPanel HorizontalAlignment="Right">
+                            <AppBarButton x:Name="TakePictureButton" Icon="Camera" Foreground="White" Label="photo" Command="{Binding TakePictureCommand}" IsEnabled="{Binding TodoItem.IsComplete, Converter={StaticResource BooleanInverter}}"/>
+                            <AppBarButton x:Name="SelectPictureButton" Icon="Pictures" Foreground="White" Label="select" Command="{Binding SelectPictureCommand}" IsEnabled="{Binding TodoItem.IsComplete, Converter={StaticResource BooleanInverter}}"/>
+                        </StackPanel>
 
-                <CommandBar Margin="0,0,0,8">
-                    <AppBarButton x:Name="TakePictureButton" Icon="Camera" Label="photo" Command="{Binding TakePictureCommand}"/>
-                    <AppBarButton x:Name="SelectPictureButton" Icon="Pictures" Label="select" Command="{Binding SelectPictureCommand}"/>
-                </CommandBar>
+                        <TextBox Text="{Binding TodoItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 Margin="12,0" 
+                                 FontSize="25"
+                                 PlaceholderText="Enter title here"
+                                 VerticalAlignment="Bottom" 
+                                 Style="{StaticResource NewItemTextBoxStyle}"
+                                 Foreground="White"
+                                 IsEnabled="{Binding TodoItem.IsComplete, Converter={StaticResource BooleanInverter}}"/>
+                    </Grid>
 
-                <!-- item details -->
-                <TextBox Width="300" Height="96" Margin="0,12,0,0" Header="Details" 
-                         Text="{Binding TodoItem.Details, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <DatePicker Width="300" Margin="0,12,0,0" Header="Due Date" 
+                    <TextBox Height="96" Margin="12" PlaceholderText="Details" 
+                         Text="{Binding TodoItem.Details, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                             IsEnabled="{Binding TodoItem.IsComplete, Converter={StaticResource BooleanInverter}}"/>
+                    <DatePicker Margin="12" Header="Due Date" 
                             Date="{Binding TodoItem.DueDate, Mode=TwoWay, Converter={StaticResource DateTimeToDateTimeOffsetConverter}}"
-                            HorizontalAlignment="Center"/>
-            </StackPanel>
+                            HorizontalAlignment="Stretch"
+                                IsEnabled="{Binding TodoItem.IsComplete, Converter={StaticResource BooleanInverter}}"/>
+
+
+
+                </StackPanel>
+            </Grid>
         </ScrollViewer>
+        <CommandBar Grid.Row="1" >
+            <AppBarButton Icon="Favorite" Label="Favorite" Command="{Binding ToggleFavoriteCommand}"/>
+            <AppBarButton Icon="Accept" Label="Complete" Command="{Binding ToggleCompletedCommand}"/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Delete" Label="Delete" Click="Delete_Clicked"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
     </Grid>
 </UserControl>
