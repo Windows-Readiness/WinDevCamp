@@ -1,0 +1,6 @@
+[submodule "Presentation/09. Web Platform in Windows/Demos/BankOfContoso"]
+	path = Presentation/09. Web Platform in Windows/Demos/BankOfContoso
+	url = https://github.com/boyofgreen/BankOfContoso
+[submodule "Presentation/09. Web Platform in Windows/Demos/ContosoTravel"]
+	path = Presentation/09. Web Platform in Windows/Demos/ContosoTravel
+	url = https://github.com/boyofgreen/ContosoTravel
