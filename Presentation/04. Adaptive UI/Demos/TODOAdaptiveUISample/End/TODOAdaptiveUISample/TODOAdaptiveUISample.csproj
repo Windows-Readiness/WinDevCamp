@@ -97,6 +97,7 @@
     <Compile Include="Common\BootStrapper.cs" />
     <Compile Include="Controls\SlidableListItem.cs" />
     <Compile Include="Converters\DateTimeToHumanReadableConverter.cs" />
+    <Compile Include="Converters\ColorEnumToSolidColorBrushConverter.cs" />
     <Compile Include="Converters\HexToSolidColorBrushConverter.cs" />
     <Compile Include="Converters\DateTimeToDateTimeOffsetConverter.cs" />
     <Compile Include="Converters\ValueWhenConverter.cs" />

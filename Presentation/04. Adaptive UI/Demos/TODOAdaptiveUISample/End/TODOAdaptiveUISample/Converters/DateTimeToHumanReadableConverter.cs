@@ -22,10 +22,8 @@ namespace TODOAdaptiveUISample.Converters
                     return "1 day left";
                 else if (ts.Days == 0)
                     return "due today";
-                else if (ts.Days == 1)
-                    return "overdue by 1 day";
                 else
-                    return "overdue by " + ts.Days + " days";
+                    return "overdue";
             }
             catch { return value; }
         }

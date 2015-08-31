@@ -114,7 +114,7 @@ namespace TODOAdaptiveUISample.ViewModels
                 await _todoItemRepository.DeleteTodoItem(this.SelectedItem.TodoItem);
 
                 this.ItemVMs.Remove(this.SelectedItem);
-                this.SelectedItem = this.ItemVMs.First();
+                //this.SelectedItem = this.ItemVMs.First();
             }
             catch { this.SelectedItem = null; }
         }

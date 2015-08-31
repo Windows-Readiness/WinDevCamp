@@ -82,7 +82,7 @@ namespace TODOAdaptiveUISample.Repositories
                 Title = title ?? string.Empty,
                 ImageUri = imageUri,
                 DueDate = DateTime.Now.AddDays(7),
-                Color = String.Format("#{0:X6}", (new Random()).Next(0x1000000))
+                Color = (TaskColor)(new Random().Next(8))
         };
             
             return item;

@@ -8,6 +8,7 @@
         <Setter Property="RightCommandForeground" Value="White"></Setter>
         <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
         <Setter Property="Background" Value="White"></Setter>
+        <Setter Property="ActivationWidth" Value="150"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:SlidableListItem">
@@ -29,7 +30,7 @@
                                 </StackPanel.RenderTransform>
                             </StackPanel>
                         </Grid>
-                        <Grid ManipulationMode="TranslateX" x:Name="ContentGrid" Background="{TemplateBinding Background}">
+                        <Grid ManipulationMode="TranslateX,System" x:Name="ContentGrid" Background="{TemplateBinding Background}">
                             <ContentPresenter />
                             <Grid.RenderTransform>
                                 <CompositeTransform x:Name="ContentTransform"/>

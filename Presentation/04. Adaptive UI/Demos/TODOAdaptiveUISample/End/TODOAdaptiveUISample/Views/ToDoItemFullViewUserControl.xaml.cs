@@ -26,6 +26,15 @@ namespace TODOAdaptiveUISample.Views
         public ToDoItemFullViewUserControl()
         {
             this.InitializeComponent();
+            Categories = new List<Models.TaskColor>();
+            Categories.Add(Models.TaskColor.Purple);
+            Categories.Add(Models.TaskColor.Pink);
+            Categories.Add(Models.TaskColor.Orange);
+            Categories.Add(Models.TaskColor.Yellow);
+            Categories.Add(Models.TaskColor.Teal);
+            Categories.Add(Models.TaskColor.Green);
+            Categories.Add(Models.TaskColor.Gray);
+            Categories.Add(Models.TaskColor.Blue);
         }
 
         private void Delete_Clicked(object sender, RoutedEventArgs e)
@@ -35,6 +44,16 @@ namespace TODOAdaptiveUISample.Views
                 DeleteItemClicked(this, new EventArgs());
             else
                 (DataContext as TodoItemViewModel).RemoveItemCommand.Execute(null);
+        }
+
+        List<Models.TaskColor> Categories;
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                (DataContext as TodoItemViewModel).TodoItem.Color = (Models.TaskColor)e.AddedItems[0];
+            }
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Comet.Controls
 
         public event EventHandler RightCommandActivated;
         public event EventHandler LeftCommandActivated;
-        
+
         public SlidableListItem()
         {
             this.DefaultStyleKey = typeof(SlidableListItem);
@@ -323,7 +323,7 @@ namespace Comet.Controls
 
         private void ContentGrid_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
-            
+
         }
     }
 }

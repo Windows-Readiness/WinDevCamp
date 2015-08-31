@@ -20,7 +20,7 @@
                 </VisualState>
                 <VisualState x:Name="VisualStateMinWidth0">
                     <VisualState.Setters>
-                        <Setter Target="dueDate.Visibility" Value="Collapsed"/>
+                        <!--<Setter Target="dueDate.Visibility" Value="Collapsed"/>-->
                         <Setter Target="textBlock.FontSize" Value="18"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
@@ -48,12 +48,12 @@
                                 MouseSlidingEnabled="True">
             <Grid Height="40">
                 <Canvas >
-                    <Path Data="M0,0 L0,8 L24,40 L40,40 L40,0" Fill="{Binding TodoItem.Color, Converter={StaticResource HexToSolidColorBrushConverter}}"></Path>
+                    <Path Data="M0,0 L0,8 L24,40 L40,40 L40,0" Fill="{Binding TodoItem.Color, Converter={StaticResource ColorEnumToSolidColorBrushConverter}}"></Path>
                     <Path Tapped="Left_Tapped" Data="M0,8 L0,40 L24,40" Fill="Transparent"></Path>
                 </Canvas>
 
                 <Canvas HorizontalAlignment="Right" Width="40">
-                    <Path Data="M0,0 L0,40 L40,40 L40,32 L16,0" Fill="{Binding TodoItem.Color, Converter={StaticResource HexToSolidColorBrushConverter}}"></Path>
+                    <Path Data="M0,0 L0,40 L40,40 L40,32 L16,0" Fill="{Binding TodoItem.Color, Converter={StaticResource ColorEnumToSolidColorBrushConverter}}"></Path>
                     <Path Tapped="Right_Tapped" Data="M16,0 L40,0 L40,32" Fill="Transparent"></Path>
                 </Canvas>
                 
@@ -61,9 +61,20 @@
                         Margin="25,0,25,0" 
                         BorderBrush="#99FFFFFF" 
                         HorizontalAlignment="Stretch" 
-                        Background="{Binding TodoItem.Color, Converter={StaticResource HexToSolidColorBrushConverter}}" />
+                        Background="{Binding TodoItem.Color, Converter={StaticResource ColorEnumToSolidColorBrushConverter}}" />
+
+                <Border Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <TextBlock x:Name="dueDate"
+                           Foreground="#33747474"
+                           Text="{Binding TodoItem.DueDate, Converter={StaticResource DateTimeToHumanReadableConverter}}"
+                           Margin="0,-15,12,0"
+                           HorizontalAlignment="Right"
+                           FontSize="52" VerticalAlignment="Top" />
+                </Border>
                 
+
                 <TextBlock x:Name="textBlock" 
+                           
                            Foreground="White" 
                            Text="{Binding TodoItem.Title}" 
                            FontWeight="Normal" 
@@ -73,12 +84,9 @@
                            VerticalAlignment="Center" 
                            TextTrimming="CharacterEllipsis" />
                 
-                <TextBlock x:Name="dueDate"
-                           Foreground="White"
-                           Text="{Binding TodoItem.DueDate, Converter={StaticResource DateTimeToHumanReadableConverter}}"
-                           Margin="0,2,26,2"
-                           HorizontalAlignment="Right"
-                           FontSize="11" />
+                
+
+                <!---->
 
                 <Grid IsHitTestVisible="False" 
                         Visibility="{Binding TodoItem.IsComplete, Converter={StaticResource VisibleWhenTrueConverter}}" 

@@ -54,7 +54,6 @@
                    Grid.RowSpan="2" 
                    IsPaneOpen="False" 
                    PanePlacement="Right" 
-                   OpenPaneLength="400" 
                    DisplayMode="Inline" 
                    PaneClosed="splitView_PaneClosed">
 
@@ -65,14 +64,22 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Border x:Name="TitleBar">
-                    <TextBlock Text="picture todo" x:Name="AppTitle" Style="{StaticResource TitleTextBlockStyle}" 
-                   Margin="12,5,12,5" Foreground="Black" FontFamily="Segoe UI Semilight" />
+                <Border Grid.RowSpan="2" Visibility="{Binding ItemVMs.Count, Converter={StaticResource VisibleWhenZeroConverter}}">
+                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" TextWrapping="WrapWholeWords" Margin="28" Foreground="Orange">
+                        <Run>Hi!</Run><LineBreak></LineBreak>
+                        <LineBreak></LineBreak>
+                        <Run>You should add something so I have something to do ... err, so </Run>
+                        <Run FontWeight="Bold" Text=" you "></Run>
+                        <Run> have something to do</Run><LineBreak></LineBreak>
+                        <Run FontFamily="Segoe UI Symbol" FontSize="72">&#xE011;</Run>
+                    </TextBlock>
                 </Border>
+
+                
                 <ListView x:Name="ToDoListView" 
-                          Grid.Row="1"
-                          Grid.RowSpan="2"
-                          Padding="0,0,0,12"
+                          Grid.Row="0"
+                          Grid.RowSpan="3"
+                          Padding="0,40,0,52"
                           IsItemClickEnabled="False"
                           ItemsSource="{Binding ItemVMs}" VerticalAlignment="Top" 
                           SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
@@ -85,12 +92,20 @@
                     </ListView.ItemContainerTransitions>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="#7F939393" BorderThickness="1" Tapped="TodoItem_Tapped" CornerRadius="5">
+                            <Border BorderBrush="#7F939393" BorderThickness="1" Tapped="TodoItem_Tapped" >
                                 <views:ListToDoItemUserControl />
                             </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Border x:Name="TitleBar" BorderBrush="#66838383" BorderThickness="0,1,0,1" Background="#CCC9C9C9" Height="35">
+                    <TextBlock Text="picture todo" 
+                               x:Name="AppTitle" Style="{StaticResource TitleTextBlockStyle}" 
+                               Margin="12,5,12,5" 
+                               Foreground="Black" 
+                               FontFamily="Segoe UI Semilight"
+                               FontSize="20"/>
+                </Border>
                 <Border Grid.Row="2" Height="48" BorderBrush="#66838383" BorderThickness="0,1,0,1" Background="#CCC9C9C9">
                     <TextBox KeyDown="TextBox_KeyDown" PlaceholderText="add a new task" 
             					Style="{StaticResource NewItemTextBoxStyle}" Foreground="#FF383838" FontSize="18.667" />

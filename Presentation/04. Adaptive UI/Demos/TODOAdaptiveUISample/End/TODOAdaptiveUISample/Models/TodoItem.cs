@@ -29,9 +29,9 @@ namespace TODOAdaptiveUISample.Models
         [JsonProperty(PropertyName = "isFavorite")]
         public bool IsFavorite { get { return _IsFavorite; } set { Set(ref _IsFavorite, value); } }
 
-        private string _Color;
+        private TaskColor _Color;
         [JsonProperty(PropertyName = "color")]
-        public string Color { get { return _Color; } set { Set(ref _Color, value); } }
+        public TaskColor Color { get { return _Color; } set { Set(ref _Color, value); } }
 
 
         private Uri _ImageUri = default(Uri);
@@ -43,5 +43,17 @@ namespace TODOAdaptiveUISample.Models
                 Set(ref _ImageUri, value);
             }
         }
+    }
+
+    public enum TaskColor
+    {
+        Purple,
+        Pink,
+        Orange,
+        Yellow,
+        Teal,
+        Green,
+        Gray,
+        Blue
     }
 }

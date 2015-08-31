@@ -1,7 +1,9 @@
 ﻿using System;
 using TODOAdaptiveUISample.ViewModels;
 using Windows.ApplicationModel.Core;
+using Windows.Foundation.Metadata;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -16,16 +18,19 @@ namespace TODOAdaptiveUISample.Views
             this.InitializeComponent();
             this.ViewModel = this.DataContext as ViewModels.MainPageViewModel;
             var viewTitleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
-            
-            
 
-            var titleBar = CoreApplication.GetCurrentView().TitleBar;
-            //titleBar.ExtendViewIntoTitleBar = true;
-            //TitleBar.Height = titleBar.Height;
+
+            viewTitleBar.BackgroundColor = Windows.UI.Color.FromArgb(0xCC, 0xC9, 0xC9, 0xC9);
+            viewTitleBar.ButtonBackgroundColor = Windows.UI.Color.FromArgb(0xCC, 0xC9, 0xC9, 0xC9);
+
+            if (ApiInformation.IsTypePresent(typeof(StatusBar).ToString()))
+                StatusBar.GetForCurrentView().HideAsync();
+
+            //CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            //coreTitleBar.ExtendViewIntoTitleBar = true;
+
+            //TitleBar.Height = coreTitleBar.Height;
             //Window.Current.SetTitleBar(TitleBar);
-
-            //viewTitleBar.BackgroundColor = Windows.UI.Colors.CornflowerBlue;
-            //viewTitleBar.ButtonBackgroundColor = Windows.UI.Colors.CornflowerBlue;
 
             Window.Current.SizeChanged += Current_SizeChanged;
         }
