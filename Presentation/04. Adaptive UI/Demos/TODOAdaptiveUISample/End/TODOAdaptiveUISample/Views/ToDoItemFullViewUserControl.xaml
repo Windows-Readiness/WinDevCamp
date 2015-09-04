@@ -17,8 +17,12 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Border Grid.RowSpan="2" VerticalAlignment="Stretch" Background="#4C000000" />
-        <Image Source="{Binding TodoItem.ImageUri}" VerticalAlignment="Top" Height="350" Stretch="UniformToFill" />
+        <Border Grid.RowSpan="2" VerticalAlignment="Stretch" Background="#4C000000" ></Border>
+        <Border Height="350" VerticalAlignment="Top">
+            <Border.Background>
+                <ImageBrush ImageSource="{Binding TodoItem.ImageUri}" Stretch="UniformToFill" AlignmentY="Center" AlignmentX="Center"></ImageBrush>
+            </Border.Background>
+        </Border>
 
         <ScrollViewer Grid.RowSpan="2" Padding="0,0,0,48" 
                       HorizontalScrollBarVisibility="Disabled" 
@@ -37,8 +41,8 @@
                 <Grid Height="250">
                     <!--<Border Background="#4C000000"></Border>-->
                     <StackPanel HorizontalAlignment="Right">
-                        <AppBarButton x:Name="TakePictureButton" Icon="Camera" Foreground="White" Label="photo" Command="{Binding TakePictureCommand}" IsEnabled="{Binding TodoItem.IsComplete, Converter={StaticResource BooleanInverter}}"/>
-                        <AppBarButton x:Name="SelectPictureButton" Icon="Pictures" Foreground="White" Label="select" Command="{Binding SelectPictureCommand}" IsEnabled="{Binding TodoItem.IsComplete, Converter={StaticResource BooleanInverter}}"/>
+                        <AppBarButton x:Name="TakePictureButton" Icon="Camera" Foreground="White" Click="TakePictureButton_Click" Label="photo" IsEnabled="{Binding TodoItem.IsComplete, Converter={StaticResource BooleanInverter}}"/>
+                        <AppBarButton x:Name="SelectPictureButton" Icon="Pictures" Foreground="White" Label="select" Click="SelectPictureButton_Click" IsEnabled="{Binding TodoItem.IsComplete, Converter={StaticResource BooleanInverter}}"/>
                     </StackPanel>
 
                     <TextBox Text="{Binding TodoItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 

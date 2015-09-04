@@ -22,6 +22,7 @@ namespace TODOAdaptiveUISample.Views
     {
 
         public event EventHandler DeleteItemClicked;
+        public event EventHandler<CommandCompletedEventArgs> CommandCompleted;
 
         public ToDoItemFullViewUserControl()
         {
@@ -55,5 +56,30 @@ namespace TODOAdaptiveUISample.Views
                 (DataContext as TodoItemViewModel).TodoItem.Color = (Models.TaskColor)e.AddedItems[0];
             }
         }
+
+        private async void TakePictureButton_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = (DataContext as TodoItemViewModel);
+            await vm.TakePicture();
+            if (CommandCompleted != null)
+            {
+                CommandCompleted(this, new CommandCompletedEventArgs() { ViewModel = vm });
+            }
+        }
+
+        private async void SelectPictureButton_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = (DataContext as TodoItemViewModel);
+            await vm.SelectPicture();
+            if (CommandCompleted != null)
+            {
+                CommandCompleted(this, new CommandCompletedEventArgs() { ViewModel = vm });
+            }
+        }
+    }
+
+    public class CommandCompletedEventArgs : EventArgs
+    {
+        public TodoItemViewModel ViewModel { get; set; }
     }
 }

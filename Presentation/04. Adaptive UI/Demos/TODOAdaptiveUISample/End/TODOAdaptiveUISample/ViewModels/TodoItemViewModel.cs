@@ -77,6 +77,11 @@ namespace TODOAdaptiveUISample.ViewModels
         private bool CanExecuteSelectPictureCommand() { return !Busy; }
         private async void ExecuteSelectPictureCommand()
         {
+            await SelectPicture();
+        }
+
+        public async Task SelectPicture()
+        {
             try
             {
                 Busy = true;
@@ -106,6 +111,11 @@ namespace TODOAdaptiveUISample.ViewModels
         public Mvvm.Command TakePictureCommand { get { return _TakePictureCommand ?? (_TakePictureCommand = new Mvvm.Command(ExecuteTakePictureCommand, CanExecuteSelectPictureCommand)); } }
         private bool CanExecuteTakePictureCommand() { return !Busy && Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Media.Capture.CameraCaptureUI"); }
         private async void ExecuteTakePictureCommand()
+        {
+            await TakePicture();
+        }
+
+        public async Task TakePicture()
         {
             try
             {

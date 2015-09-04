@@ -13,6 +13,9 @@ namespace TODOAdaptiveUISample.Views
 {
     public sealed partial class MainPage : Page
     {
+        ViewModels.MainPageViewModel ViewModel { get; set; }
+        private TodoItemViewModel PreviousSelectedItem;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -26,27 +29,21 @@ namespace TODOAdaptiveUISample.Views
             if (ApiInformation.IsTypePresent(typeof(StatusBar).ToString()))
                 StatusBar.GetForCurrentView().HideAsync();
 
-            //CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            //coreTitleBar.ExtendViewIntoTitleBar = true;
-
-            //TitleBar.Height = coreTitleBar.Height;
-            //Window.Current.SetTitleBar(TitleBar);
-
-            Window.Current.SizeChanged += Current_SizeChanged;
+            this.Loaded += MainPage_Loaded;
+            this.SizeChanged += MainPage_SizeChanged;
         }
 
-        private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
+        private void MainPage_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (e.Size.Width < 400)
+            if (e.NewSize.Width > 600 && e.PreviousSize.Width <= 600)
             {
-                splitView.OpenPaneLength = e.Size.Width - 20;
+                ToDoListView.SelectedItem = PreviousSelectedItem;
             }
-            else if (splitView.OpenPaneLength != 400)
-            {
-                splitView.OpenPaneLength = 400;
-            }
+        }
 
-            if (e.Size.Width >= 600 && ToDoListView.SelectedItem == null)
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Window.Current.Bounds.Width > 600)
             {
                 try
                 {
@@ -54,24 +51,20 @@ namespace TODOAdaptiveUISample.Views
                 }
                 catch
                 {
-
+                    //nop
                 }
             }
         }
 
-        ViewModels.MainPageViewModel ViewModel { get; set; }
 
         // using a tapped event so we can have hitable areas inside the listviewitem without
         // actualy selecting the item
         private void TodoItem_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            
-
             // If the inline panel is not showing, navigate to the separate editing page
             if ((sender as Border).DataContext != null)
             {
                 ToDoListView.SelectedItem = ((TodoItemViewModel)(sender as Border).DataContext);
-                //((App)(Application.Current)).NavigationService.Navigate(typeof(ToDoEditorPage), ((TodoItemViewModel)(sender as Border).DataContext).TodoItem.Id);
             }
         }
 
@@ -90,9 +83,18 @@ namespace TODOAdaptiveUISample.Views
             else
             {
                 InlineViewerEditor.DataContext = ToDoListView.SelectedItem;
-                splitView.IsPaneOpen = true;
+                OpenPane();
             }
             
+        }
+
+        private void OpenPane()
+        {
+            splitView.IsPaneOpen = true;
+            if (Window.Current.Bounds.Width <= 600)
+            {
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            }
         }
 
         private TextBox NewToDoItemNameTextBox = null;
@@ -120,11 +122,8 @@ namespace TODOAdaptiveUISample.Views
                 if (e.Key == Windows.System.VirtualKey.Enter)
                 {
                     // Handle 'Enter' key for keyboard users
-                    if (e.Key == Windows.System.VirtualKey.Enter)
-                    {
-                        e.Handled = true;
-                        CreateNewToDoItem(textBox);
-                    }
+                    e.Handled = true;
+                    CreateNewToDoItem(textBox);
                 }
             }
             else
@@ -160,9 +159,17 @@ namespace TODOAdaptiveUISample.Views
                 {
                     ToDoListView.SelectedIndex = 0;
                 }
-                catch{}
+                catch { }
             else
+            {
+                PreviousSelectedItem = ToDoListView.SelectedItem as TodoItemViewModel;
                 ToDoListView.SelectedItem = null;
+            }
+
+            if (!this.Frame.CanGoBack)
+            {
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            }
 
         }
 
@@ -174,6 +181,14 @@ namespace TODOAdaptiveUISample.Views
                 vm.RemoveItemCommand.Execute(null);
             }
             
+        }
+
+        private void InlineViewerEditor_CommandCompleted(object sender, CommandCompletedEventArgs e)
+        {
+            if (Window.Current.Bounds.Width <= 600)
+            {
+                ToDoListView.SelectedItem = e.ViewModel;
+            }
         }
     }
 }
