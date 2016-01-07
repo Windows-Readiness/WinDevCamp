@@ -1,9 +1,10 @@
 # WinDevCamp
 Windows 10 Developer Training (XAML / C#)
 
-August 2015 Release (Build 10240)
+December 2015 Release (Build 10586)
 
-This developer training for Windows 10 is based on the two day online on-demand training available on Channel 9, [The Developer's Guide to Windows 10] (https://channel9.msdn.com/Events/Windows/Developers-Guide-to-Windows-10-RTM), by Andy Wigley and Shen Chauhan.
+This developer training for Windows 10 is based on the two day online on-demand training available on Channel 9, [The Developer's Guide to Windows 10] (https://channel9.msdn.com/Events/Windows/Developers-Guide-to-Windows-10-RTM), by Andy Wigley and Shen Chauhan. The content presented in that webcast was created for the initial Windows 10 release, Build 10240 and can be found under the Presentation folder.
+This original content has now been supplemented by an additional half day of content covering what is new for developers in the Windows 10 Version 1511 release, and the Build 10586 SDK. This new content can be found under the Version 1511 Update foder
 
 Suggested agenda for a 1 day Windows 10 Dev Camp
 
